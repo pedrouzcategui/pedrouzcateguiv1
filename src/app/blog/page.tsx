@@ -1,4 +1,3 @@
-import Link from "next/link";
 import BlogPost from "./components/BlogPost";
 import Navbar from "@/components/Navbar";
 
@@ -7,52 +6,46 @@ const posts = [
   {
     id: 1,
     date: "November 5, 2025",
-    title: "How to Implement a MultiWriter logger in Golang",
+    title: "Which pokemons are broken, from a data viewpoint.",
     excerpt:
-      "Learn step by step how to create a MultiWriter logger in Golang to write logs to multiple destinations simultaneously using slog.",
-    tags: ["GOLANG"],
+      "Understanding pseudo-legendaries, and making the best Hoenn team using data.",
+    tags: ["Python", "Pandas", "Jupyter Notebook"],
   },
   {
     id: 2,
     date: "October 20, 2025",
-    title: "Create your first Docker image",
+    title: "I am tired of mediocre DJs, so I made a DJ app that automatically shuffles your songs properly",
     excerpt:
-      "Learn how to containerize your application by building your first Docker image.",
-    tags: ["CONTAINERS", "DOCKER", "GOLANG"],
+      "I am getting hate for this one",
+    tags: ["SFML", "C++", "STRUDEL"],
   },
   {
     id: 3,
     date: "October 9, 2025",
-    title: "Setting up a Kafka event broker with producers and consumers",
+    title: "Improving your English accent and why is critical to make more money",
     excerpt:
-      "A comprehensive guide on setting up a Kafka environment and connecting your first producers and consumers.",
-    tags: ["KAFKA", "GO", "EVENT-DRIVEN"],
+      "If you are not american, or have not been born in Europe, you probably need to read this one.",
   },
 ];
 
 export default function BlogPage() {
   return (
-    <div className="min-h-screen bg-primary font-sans text-secondary">
-      {/* --- Navbar --- */}
-      <Navbar />
-      {/* --- Main Content --- */}
-      <main className="max-w-3xl mx-auto px-6 pt-16 pb-24">
-        {/* Header Section */}
-        <header className="text-center mb-16">
-          <h1 className="text-4xl font-medium mb-6 tracking-tight">Blog</h1>
-          <p className="text-lg leading-relaxed max-w-xl mx-auto">
-            Thoughts on development, cloud design, and the ever-evolving
-            backend, infrastructure and devops topics
-          </p>
-        </header>
+    <>
+      {/* Header Section */}
+      <header className="text-center mb-16">
+        <h1 className="text-4xl font-medium mb-6 tracking-tight">Blog</h1>
+        <p className="text-lg leading-relaxed max-w-xl mx-auto">
+          Thoughts on development, cloud design, and the ever-evolving backend,
+          infrastructure and devops topics
+        </p>
+      </header>
 
-        {/* Blog Post List */}
-        <div className="space-y-6">
-          {posts.map((post) => (
-            <BlogPost {...post} key={post.id} />
-          ))}
-        </div>
-      </main>
-    </div>
+      {/* Blog Post List */}
+      <div className="space-y-6">
+        {posts.map((post) => (
+          <BlogPost {...post} key={post.id} />
+        ))}
+      </div>
+    </>
   );
 }

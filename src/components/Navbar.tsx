@@ -11,12 +11,6 @@ const Navbar = () => {
             <Link href="/blog" >
               Blog
             </Link>
-            <Link
-              href="/contact"
-              className=""
-            >
-              Contact
-            </Link>
           </div>
         </div>
       </nav>

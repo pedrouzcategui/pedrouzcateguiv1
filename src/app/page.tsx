@@ -1,4 +1,5 @@
 import ContactForm from "@/components/ContactForm";
+import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
 import ProjectCard from "@/components/ProjectCard";
 import {
@@ -67,17 +68,7 @@ const App = () => {
       <Navbar />
       <div className="max-w-6xl mx-auto">
         {/* Header Section */}
-        <header className="text-center py-12">
-          {/* Título principal con el color beige */}
-          <h1 className="text-5xl sm:text-7xl font-bold tracking-tight text-secondary">
-            Pedro Uzcátegui
-          </h1>
-          {/* Subtítulo con el color verde militar */}
-          <h2 className="text-xl sm:text-2xl text-secondary font-light mt-2">
-            AI Engineer | DevOps Specialist
-          </h2>
-        </header>
-
+        <Hero />
         {/* About Me Section */}
         <section id="about" className="py-12 md:py-16">
           <div>

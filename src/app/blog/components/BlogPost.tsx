@@ -3,10 +3,10 @@ type BlogPostProps = {
     date: string;
     title: string;
     excerpt: string;
-    tags: string[];
+    tags?: string[];
 }
 
-const BlogPost = ({id, date, title, excerpt, tags}: BlogPostProps) => {
+const BlogPost = ({date, title, excerpt, tags}: BlogPostProps) => {
     return (
             <article 
               className="group block p-6 sm:p-8 border border-terciary rounded-lg hover:border-secondary hover:shadow-sm transition-all duration-200 ease-in-out cursor-pointer"
@@ -28,7 +28,7 @@ const BlogPost = ({id, date, title, excerpt, tags}: BlogPostProps) => {
               
               {/* Tags */}
               <div className="flex flex-wrap gap-2">
-                {tags.map((tag) => (
+                {tags?.map((tag) => (
                   <span 
                     key={tag} 
                     className="px-2.5 py-1 bg-terciary text-secondary text-xs font-semibold tracking-wide uppercase rounded-md"
