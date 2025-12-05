@@ -1,33 +1,58 @@
-import ContactForm from "@/components/ContactForm";
-import ProjectCard from "@/components/ProjectCard";
-import {
-  Dog,
-  Dumbbell,
-  Hamburger,
-  PiggyBank,
-  ScanHeart,
-  Settings,
-} from "lucide-react";
-import Image from "next/image";
+import Link from "next/link";
+import BlogPost from "./components/BlogPost";
+import Navbar from "@/components/Navbar";
 
-const Page = () => {
+// 1. Define the data structure to match the image content
+const posts = [
+  {
+    id: 1,
+    date: "November 5, 2025",
+    title: "How to Implement a MultiWriter logger in Golang",
+    excerpt:
+      "Learn step by step how to create a MultiWriter logger in Golang to write logs to multiple destinations simultaneously using slog.",
+    tags: ["GOLANG"],
+  },
+  {
+    id: 2,
+    date: "October 20, 2025",
+    title: "Create your first Docker image",
+    excerpt:
+      "Learn how to containerize your application by building your first Docker image.",
+    tags: ["CONTAINERS", "DOCKER", "GOLANG"],
+  },
+  {
+    id: 3,
+    date: "October 9, 2025",
+    title: "Setting up a Kafka event broker with producers and consumers",
+    excerpt:
+      "A comprehensive guide on setting up a Kafka environment and connecting your first producers and consumers.",
+    tags: ["KAFKA", "GO", "EVENT-DRIVEN"],
+  },
+];
+
+export default function BlogPage() {
   return (
-    // Fondo principal con el negro de la paleta
-    <div className="min-h-screen bg-linear-to-br from-primary to-[#111010] font-sans text-secondary p-4 sm:p-8">
-      <h2 className="text-2xl mb-4s">This is the fucking blog</h2>
-      <ul>
-        <li>
-          <a>How to fine tune an A.I model</a>
-        </li>
-        <li>
-          <a>My journey becoming an A.I Engineer</a>
-        </li>
-        <li>
-          <a>How to solve the value alignment problem</a>
-        </li>
-      </ul>
+    <div className="min-h-screen bg-primary font-sans text-secondary">
+      {/* --- Navbar --- */}
+      <Navbar />
+      {/* --- Main Content --- */}
+      <main className="max-w-3xl mx-auto px-6 pt-16 pb-24">
+        {/* Header Section */}
+        <header className="text-center mb-16">
+          <h1 className="text-4xl font-medium mb-6 tracking-tight">Blog</h1>
+          <p className="text-lg leading-relaxed max-w-xl mx-auto">
+            Thoughts on development, cloud design, and the ever-evolving
+            backend, infrastructure and devops topics
+          </p>
+        </header>
+
+        {/* Blog Post List */}
+        <div className="space-y-6">
+          {posts.map((post) => (
+            <BlogPost {...post} key={post.id} />
+          ))}
+        </div>
+      </main>
     </div>
   );
-};
-
-export default Page;
+}

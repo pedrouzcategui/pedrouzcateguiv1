@@ -1,4 +1,5 @@
 import ContactForm from "@/components/ContactForm";
+import Navbar from "@/components/Navbar";
 import ProjectCard from "@/components/ProjectCard";
 import {
   Dog,
@@ -61,47 +62,10 @@ const projects = [
 const App = () => {
   return (
     // Fondo principal con el negro de la paleta
-    <div className="min-h-screen bg-linear-to-br from-primary to-[#111010] font-sans text-secondary p-4 sm:p-8">
+    <div className="min-h-screen bg-primary">
+      {/* Navigation Menu */}
+      <Navbar />
       <div className="max-w-6xl mx-auto">
-        {/* Navigation Menu */}
-        <nav className="flex justify-center sm:justify-end py-4">
-          <ul className="flex space-x-6 text-lg">
-            <li>
-              <a
-                href="#about"
-                // Enlaces y hover usan el color beige claro
-                className="text-secondary transition duration-300"
-              >
-                About Me
-              </a>
-            </li>
-            <li>
-              <a
-                href="#projects"
-                className="text-secondary transition duration-300"
-              >
-                Projects
-              </a>
-            </li>
-            <li>
-              <a
-                href="#contact"
-                className="text-secondary transition duration-300"
-              >
-                Contact
-              </a>
-            </li>
-            <li>
-              <a
-                href="/blog"
-                className="text-secondary transition duration-300"
-              >
-                Blog
-              </a>
-            </li>
-          </ul>
-        </nav>
-
         {/* Header Section */}
         <header className="text-center py-12">
           {/* Título principal con el color beige */}
