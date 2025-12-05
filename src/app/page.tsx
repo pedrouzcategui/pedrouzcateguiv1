@@ -120,7 +120,7 @@ const App = () => {
             <h3 className="text-3xl font-bold text-[#ECDFCC] mb-8 sm:mb-12 border-l-4 border-terciary pl-4">
               About Me
             </h3>
-            <div className="flex items-center gap-8">
+            <div className="flex flex-col md:flex-row items-center gap-8">
               {/* Contenedor de la imagen con el color secundario gris oscuro */}
               <div>
                 <Image
