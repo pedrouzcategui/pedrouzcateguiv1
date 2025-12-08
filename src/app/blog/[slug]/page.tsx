@@ -1,10 +1,17 @@
-const BlogPage = () => {
+import { getBlogPostObject } from "@/lib/posts.plugin";
+
+const BlogPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
+  const { slug } = await params;
+  const fileName = `${slug}.mdx`;
+  const { default: Post, metadata } = await getBlogPostObject(fileName);
+
   return (
-    <div>
-      <h1 className="text-4xl font-medium mb-6 tracking-tight">Blog Title</h1>
-      <span className="text-xl mb-6 block">{new Date().toDateString()}</span>
-      <p>Content goes here</p>
-    </div>
+    <>
+      <h1 className="text-4xl font-bold mb-6">{metadata.title}</h1>
+      <span className="block mb-6">{metadata.date}</span>
+      <span className="block mb-6">{metadata.author}</span>
+      <Post />
+    </>
   );
 };
 
