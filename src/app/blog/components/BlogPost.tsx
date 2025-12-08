@@ -11,7 +11,7 @@ type BlogPostProps = {
 
 const BlogPost = ({ date, title, excerpt, tags, slug }: BlogPostProps) => {
   return (
-    <Link href={`/blog/${slug}`}>
+    <Link href={`/blog/${slug}`} className="block mb-6">
       <article className="group block p-6 sm:p-8 border border-terciary rounded-lg hover:border-secondary hover:shadow-sm transition-all duration-200 ease-in-out cursor-pointer">
         {/* Date */}
         <div className="text-sm mb-3 font-medium">{date}</div>
