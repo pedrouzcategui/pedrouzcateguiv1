@@ -1,6 +1,4 @@
-import matter from "gray-matter";
 import path from "path";
-import fs from "fs";
 import { getBaseDirectory } from "@/utils";
 import { readdir } from "fs/promises";
 
@@ -11,7 +9,6 @@ export function getPostsFolderPath(): string {
 }
 
 export async function getBlogPostObject(fileName: string): Promise<any> {
-  // 2. Go to the POSTS folder
   try {
     return await import(`@/posts/${fileName}`);
   } catch (error) {
@@ -19,12 +16,6 @@ export async function getBlogPostObject(fileName: string): Promise<any> {
     return null;
   }
 }
-
-type Post = {
-  slug: string;
-  date: string;
-  title: string;
-};
 
 export async function getPosts(): Promise<any> {
   const postsFileNames = await readdir(getPostsFolderPath());
