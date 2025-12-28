@@ -28,9 +28,9 @@ export default async function BlogPage() {
           }: {
             default: any;
             metadata: PostMetadata;
-          }) => (
-            <BlogPost {...metadata} key={metadata.id} />
-          )
+          }) => {
+            return <BlogPost {...metadata} key={metadata.id} />;
+          }
         )}
       </div>
     </>

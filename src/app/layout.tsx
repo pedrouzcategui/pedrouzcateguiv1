@@ -3,6 +3,7 @@ import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import "katex/dist/katex.min.css";
 import "prismjs/themes/prism-okaidia.min.css";
+import Navbar from "@/components/Navbar";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -22,8 +23,10 @@ export default function RootLayout({
     <html lang="en">
       <body
         // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        id="smooth-wrapperr"
         className={`${spaceGrotesk.className}`}
       >
+        <Navbar />
         {children}
       </body>
     </html>

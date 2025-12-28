@@ -21,28 +21,23 @@ const ContactForm = () => {
     e.preventDefault();
     setStatus("sending");
 
-    // Simulación de envío de formulario (reemplazar con lógica real de API/Backend)
     console.log("Formulario enviado:", formData);
 
     setTimeout(() => {
-      // Simulación de éxito
       setStatus("success");
       setFormData({ fullName: "", email: "", phone: "", message: "" }); // Limpiar formulario
     }, 1500);
-
-    // Simulación de error si lo deseas:
-    // setTimeout(() => { setStatus("error"); }, 1500);
   };
 
   const inputClasses =
-    "w-full p-3 rounded-lg bg-[#1E201E] border border-[#697565] text-[#ECDFCC] placeholder-[#697565]/80 focus:ring-[#ECDFCC] focus:border-[#ECDFCC] transition duration-200 shadow-inner appearance-none";
+    "w-full p-3 bg-[#1E201E] border border-[#697565] text-[#ECDFCC] placeholder-[#697565]/80 focus:ring-[#ECDFCC] focus:border-[#ECDFCC] transition duration-200 shadow-inner appearance-none";
   const labelClasses = "block text-sm font-medium text-[#ECDFCC] mb-1";
 
   const socialIconClasses =
     "text-[#697565] hover:text-[#ECDFCC] transition duration-300 w-6 h-6 sm:w-8 sm:h-8";
 
   return (
-    <div className="border-secondary border-2 p-6 sm:p-10 rounded-xl  max-w-3xl mx-auto">
+    <div className="border-secondary border p-6 sm:p-10 max-w-3xl mx-auto">
       <p className="text-xl text-[#ECDFCC] mb-8 text-center">
         I'm always open to discussing new projects, collaboration opportunities,
         or exciting challenges in AI and DevOps.

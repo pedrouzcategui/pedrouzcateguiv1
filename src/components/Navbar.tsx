@@ -1,20 +1,62 @@
-import Link from "next/link"
+import {
+  Home,
+  BookOpenText,
+  BriefcaseBusiness,
+  type LucideIcon,
+} from "lucide-react";
+import Link from "next/link";
+
+type MenuItem = {
+  link: string;
+  content: string;
+  Icon: LucideIcon;
+};
+
+const MENU_ITEMS: MenuItem[] = [
+  {
+    content: "Home",
+    link: "/",
+    Icon: Home,
+  },
+  {
+    content: "Blog",
+    link: "/blog",
+    Icon: BookOpenText,
+  },
+  {
+    content: "Case Studies",
+    link: "/case-studies",
+    Icon: BriefcaseBusiness,
+  },
+];
 
 const Navbar = () => {
-    return (
-      <nav className="border-b border-gray-100/50 text-secondary">
-        <div className="max-w-4xl mx-auto px-6 py-6 flex justify-between items-center">
-          <div className="flex gap-6 font-medium">
-            <Link href="/" className="">
-              About
-            </Link>
-            <Link href="/blog" >
-              Blog
-            </Link>
-          </div>
+  return (
+    <nav className="sticky top-0 z-10 bg-primary w-full border-b border-terciary text-secondary">
+      <div className="w-[95%] mx-auto py-6 flex justify-between items-center">
+        <div className="flex w-full justify-between font-medium">
+          <p className="font-bold">Pedro Uzcátegui</p>
+          <MenuItems />
         </div>
-      </nav>
-    )
-}
+      </div>
+    </nav>
+  );
+};
+
+const MenuItems = () => {
+  return (
+    <div className="flex gap-12">
+      {MENU_ITEMS.map(({ link, content }, i) => (
+        <Link
+          key={`menu-item-${i}`}
+          className="flex items-center gap-1"
+          href={link}
+        >
+          {content}
+        </Link>
+      ))}
+    </div>
+  );
+};
 
 export default Navbar;

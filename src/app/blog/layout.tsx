@@ -7,8 +7,7 @@ export default function BlogLayout({
 }) {
   return (
     <div className="min-h-screen bg-primary font-sans text-secondary">
-      <Navbar />
-      <main className="max-w-3xl mx-auto px-6 pt-16 pb-24">{children}</main>
+      <main className="max-w-4xl mx-auto px-6 pt-16 pb-24">{children}</main>
     </div>
   );
 }
