@@ -6,13 +6,13 @@ import { ScrollTrigger } from "gsap/all";
 import ProjectCard from "@/components/ProjectCard";
 import {
   Dog,
-  Hamburger,
   PiggyBank,
   Settings,
   CatIcon,
   SmartphoneIcon,
   Gamepad2,
 } from "lucide-react";
+import SectionLabel from "./SectionLabel";
 
 gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollTrigger);
@@ -69,7 +69,10 @@ const projects = [
 const Projects = () => {
   useGSAP(() => {
     gsap.from("#projects", {
-      scrollTrigger: "#projects",
+      scrollTrigger: {
+        trigger: "#projects",
+        toggleActions: "play pause restart resume",
+      },
       duration: 1,
       opacity: 0,
       y: 400,
@@ -77,16 +80,13 @@ const Projects = () => {
 
     gsap.to(".project-card", {
       opacity: 1,
-      stagger: 0.5,
+      stagger: 0.3,
     });
   });
 
   return (
     <section id="projects" className="py-12 md:py-16">
-      <h3 className="text-3xl font-bold text-[#ECDFCC] mb-8 sm:mb-12 border-l-4 border-terciary pl-4">
-        Projects
-      </h3>
-
+      <SectionLabel>Projects</SectionLabel>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 border-terciary border">
         {projects.map((project, index) => (
           <ProjectCard

@@ -4,6 +4,7 @@ import "./globals.css";
 import "katex/dist/katex.min.css";
 import "prismjs/themes/prism-okaidia.min.css";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -21,9 +22,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body id="smooth-wrapperr" className={`${spaceGrotesk.className}`}>
+      <body className={`${spaceGrotesk.className} `}>
         <Navbar />
-        {children}
+        <div className="min-h-screen bg-primary">{children}</div>
+        <Footer />
       </body>
     </html>
   );
