@@ -11,7 +11,6 @@ export type PostMetadata = {
 
 export default async function BlogPage() {
   const postsx = await getPosts();
-  console.log(postsx);
   return (
     <>
       {/* Header Section */}

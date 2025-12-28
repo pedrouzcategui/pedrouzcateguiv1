@@ -1,4 +1,3 @@
-"use client";
 import ContactForm from "@/components/ContactForm";
 import Hero from "@/components/Hero";
 import Projects from "@/components/Projects";
@@ -9,16 +8,6 @@ import { ScrollSmoother, ScrollTrigger } from "gsap/all";
 gsap.registerPlugin(useGSAP, ScrollSmoother, ScrollTrigger);
 
 const App = () => {
-  useGSAP(() => {
-    ScrollSmoother.create({
-      smooth: 1,
-      effects: true,
-      smoothTouch: 0.1,
-      wrapper: "#smooth-wrapper",
-      content: "#smooth-content",
-    });
-  });
-
   return (
     <div id="smooth-content" className="min-h-screen bg-primary">
       <div className="w-[95%] mx-auto">

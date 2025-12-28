@@ -30,7 +30,7 @@ const projects = [
     icon: SmartphoneIcon,
     title: "Clash Royale Agent",
     description:
-      "App created to track and visualize progress on the gym, offering personalized workout plans and historical data.",
+      "Created a Clash Royale Bot that plays autonomously, based on the best decks available.",
     liveLink: "#",
     codeLink: "#",
   },

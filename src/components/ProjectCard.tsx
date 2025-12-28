@@ -25,7 +25,7 @@ const ProjectCard = ({
 
       <p className="text-secondary text-md">{description}</p>
 
-      <div className="flex space-x-3 pt-2">
+      {/* <div className="flex space-x-3 pt-2">
         <a
           href={liveLink}
           target="_blank"
@@ -45,7 +45,7 @@ const ProjectCard = ({
           <Code className="w-4 h-4" />
           <span>See Code</span>
         </a>
-      </div>
+      </div> */}
     </div>
   );
 };

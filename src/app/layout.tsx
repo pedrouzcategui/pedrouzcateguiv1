@@ -21,11 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        id="smooth-wrapperr"
-        className={`${spaceGrotesk.className}`}
-      >
+      <body id="smooth-wrapperr" className={`${spaceGrotesk.className}`}>
         <Navbar />
         {children}
       </body>
