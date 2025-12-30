@@ -1,6 +1,6 @@
 import About from "@/components/About";
-import ClientCarousel from "@/components/ClientCarousel";
 import Hero from "@/components/Hero";
+import { JobsExperience } from "@/components/JobsTimeline";
 import Projects from "@/components/Projects";
 import SmoothScrollProvider from "@/providers/SmoothScrollProvider";
 
@@ -12,7 +12,7 @@ const App = () => {
           <Hero />
           <About />
           <Projects />
-          {/* <ClientCarousel /> */}
+          <JobsExperience />
         </div>
       </div>
     </SmoothScrollProvider>

@@ -52,15 +52,16 @@ const projects = [
   },
   {
     icon: Settings,
-    title: "Gym Member Machine Make App",
-    description: "Private Make Integration Developed for Gym Member Machine.",
+    title: "Delivery Drone",
+    description:
+      "I made a Drone (from scratch), and an app to control distribution routes for said drones.",
     liveLink: "#",
     codeLink: "#",
   },
   {
     icon: Dog,
-    title: "Pokemon Simulation",
-    description: "I made a study to find the optimal best pokemon team",
+    title: "Automixer",
+    description: "Download for Free, Start To Party",
     liveLink: "#",
     codeLink: "#",
   },
@@ -71,7 +72,7 @@ const Projects = () => {
     gsap.from("#projects", {
       scrollTrigger: {
         trigger: "#projects",
-        toggleActions: "play pause restart resume",
+        toggleActions: "play pause resume resume",
       },
       duration: 1,
       opacity: 0,
@@ -87,7 +88,7 @@ const Projects = () => {
   return (
     <section id="projects" className="py-12 md:py-16">
       <SectionLabel>Projects</SectionLabel>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 border-terciary border">
+      <div className="grid md:grid-cols-2 border-terciary border">
         {projects.map((project, index) => (
           <ProjectCard
             Icon={project.icon}
