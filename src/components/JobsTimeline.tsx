@@ -4,6 +4,7 @@ import SectionLabel from "./SectionLabel";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import clsx from "clsx";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -26,11 +27,7 @@ const jobExperiences: JobExperienceProps[] = [
       "I'm now deeply involved in crucial company projects, collaborating closely with other departments. My focus has broadened from solely building automations to also critically evaluating the strategic value and implementation feasibility of departmental requests.",
     from: new Date("2025-01-01"),
     to: "NOW",
-    tags: [
-      "Project Collaboration",
-      "Strategic Value Evaluation",
-      "Process Implementation",
-    ],
+    tags: ["Python", "Make", "Zapier", "N8N", "ClickUp", "Cloudflare"],
   },
   {
     id: "2",
@@ -42,6 +39,7 @@ const jobExperiences: JobExperienceProps[] = [
     to: new Date("2025-01-01"),
     tags: [
       "JavaScript",
+      "Python",
       "Make",
       "GoHighLevel",
       "ClickUp",
@@ -51,7 +49,7 @@ const jobExperiences: JobExperienceProps[] = [
   },
   {
     id: "3",
-    job_title: "Web Developer",
+    job_title: "Full Stack Web Developer",
     company: "Ingeniust",
     description:
       "Helped build a rental car and boat rental applications using React.js, Vue.js, Laravel, Redux, component design with Storybook, as well as the usage of SSH, FTPs, and Linux for deployment.",
@@ -97,43 +95,58 @@ const formatJobDate = (date: Date | "NOW"): string => {
 };
 
 const JobExperience = ({
-  id,
   job_title,
   company,
   description,
   from,
   to,
   tags,
-}: JobExperienceProps & { id: string }) => {
+  isLast, // Add this prop
+}: JobExperienceProps & { id: string; isLast: boolean }) => {
   return (
-    // We start with opacity-0 and a small translation (y-12)
-    // to give it a "rising" effect when the animation triggers
-    <div className="job-item opacity-0 translate-y-12 border-t border-terciary py-12 flex flex-col lg:flex-row gap-8">
-      <div className="text-terciary font-mono text-sm w-12 pt-2">{id}</div>
+    <div className="job-item opacity-0 translate-y-12 flex lg:flex-row gap-8 relative">
+      {/* TIMELINE COLUMN */}
+      <div className="flex flex-col items-center w-8 shrink-0 relative top-15">
+        {/* THE DOT - Using fixed dimensions instead of padding for better alignment */}
+        <div className="bg-secondary h-4 w-4 rounded-full z-10 shrink-0"></div>
 
-      <div className="flex-1">
-        <h2 className="text-4xl mb-4 md:text-5xl font-medium text-secondary tracking-tight">
-          {job_title}
-        </h2>
-        <h3 className="text-xl font-semibold text-terciary mb-4">{company}</h3>
-        <span className="font-light text-sm text-terciary">
-          {formatJobDate(from)} - {formatJobDate(to)}
-        </span>
+        {/* THE LINE - Starts from the dot and goes to the bottom of the container */}
+        {!isLast && (
+          <div className="absolute bg-secondary w-1 z-0 top-0 bottom-0"></div>
+        )}
       </div>
 
-      <div className="flex-1 flex flex-col gap-6">
-        <p className="font-light text-lg leading-relaxed text-secondary text-justify max-w-4/5">
-          {description}
-        </p>
-        <div className="flex flex-wrap gap-2">
-          {tags?.map((tag) => (
-            <span
-              key={tag}
-              className="px-3 py-1 border border-terciary rounded-full text-[10px] text-terciary font-medium uppercase tracking-wider"
-            >
-              {tag}
+      <div className="flex-2 py-12">
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* Header Info */}
+          <div className="flex-1">
+            <h2 className="text-4xl mb-4 md:text-5xl font-medium text-secondary tracking-tight">
+              {job_title}
+            </h2>
+            <h3 className="text-xl font-semibold text-terciary mb-4">
+              {company}
+            </h3>
+            <span className="font-light text-sm text-terciary">
+              {formatJobDate(from)} - {formatJobDate(to)}
             </span>
-          ))}
+          </div>
+
+          {/* Description and Tags */}
+          <div className="flex-2 flex flex-col gap-6">
+            <p className="font-light text-lg leading-relaxed text-secondary text-justify">
+              {description}
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {tags?.map((tag) => (
+                <span
+                  key={tag}
+                  className="px-3 py-1 border border-terciary rounded-full text-[10px] text-terciary font-medium uppercase tracking-wider"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -176,6 +189,7 @@ export const JobsExperience = () => {
             key={`job-${i}`}
             {...job}
             id={(i + 1).toString().padStart(2, "0")}
+            isLast={i === jobExperiences.length - 1} // Logic to detect last element
           />
         ))}
       </div>
