@@ -1,0 +1,4 @@
+{
+  // This turns off the waring for the custom "@theme" at-rule in CSS files.
+  "css.lint.unknownAtRules": "ignore"
+}

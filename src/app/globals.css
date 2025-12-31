@@ -13,9 +13,9 @@
 }
 
 @theme {
-  --color-primary: #1e201e;
-  --color-secondary: #ecdfcc;
-  --color-terciary: #697565;
+  --color-primary: #eeeeee;
+  --color-secondary: oklch(20.5% 0 0);
+  --color-terciary: oklch(20.5% 0 0);
 }
 
 @media (prefers-color-scheme: dark) {

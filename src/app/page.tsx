@@ -7,7 +7,7 @@ import SmoothScrollProvider from "@/providers/SmoothScrollProvider";
 const App = () => {
   return (
     <SmoothScrollProvider>
-      <div id="smooth-content" className="bg-primary">
+      <div id="smooth-content">
         <div className="w-[95%] mx-auto">
           <Hero />
           <About />

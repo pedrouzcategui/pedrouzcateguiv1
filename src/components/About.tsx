@@ -6,7 +6,7 @@ export default function About() {
       <div>
         <SectionLabel>About Me</SectionLabel>
         <div className="w-4/5">
-          <p className="text-6xl/20 font-light text-[#ECDFCC]">
+          <p className="text-6xl/20 text-secondary">
             I help businesses transform through software, A.I and systems
             re-design, saving them tens of thousands of dollars (and time).
           </p>

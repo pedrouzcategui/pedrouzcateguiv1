@@ -4,7 +4,7 @@ import SectionLabel from "./SectionLabel";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import clsx from "clsx";
+import Badge from "./Badge";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -25,7 +25,7 @@ const jobExperiences: JobExperienceProps[] = [
     company: "Gym Member Machine",
     description:
       "I'm now deeply involved in crucial company projects, collaborating closely with other departments. My focus has broadened from solely building automations to also critically evaluating the strategic value and implementation feasibility of departmental requests.",
-    from: new Date("2025-01-01"),
+    from: new Date("2025-02-01"),
     to: "NOW",
     tags: ["Python", "Make", "Zapier", "N8N", "ClickUp", "Cloudflare"],
   },
@@ -36,7 +36,7 @@ const jobExperiences: JobExperienceProps[] = [
     description:
       "As an automation specialist, I bring expertise in utilizing various tools such as GoHighLevel, ClickUp, Airtable, Make, and Zapier to streamline processes. Additionally, I possess the ability to code custom automations, work with APIs, and resolve client issues through effective communication and troubleshooting. With a strong focus on optimizing efficiency, I am committed to delivering exceptional results that drive business success.",
     from: new Date("2023-01-01"),
-    to: new Date("2025-01-01"),
+    to: new Date("2025-02-01"),
     tags: [
       "JavaScript",
       "Python",
@@ -104,7 +104,7 @@ const JobExperience = ({
   isLast, // Add this prop
 }: JobExperienceProps & { id: string; isLast: boolean }) => {
   return (
-    <div className="job-item opacity-0 translate-y-12 flex lg:flex-row gap-8 relative">
+    <div className="job-item opacity-0 translate-y-12 right-3 flex lg:flex-row gap-8 relative">
       {/* TIMELINE COLUMN */}
       <div className="flex flex-col items-center w-8 shrink-0 relative top-15">
         {/* THE DOT - Using fixed dimensions instead of padding for better alignment */}
@@ -116,11 +116,11 @@ const JobExperience = ({
         )}
       </div>
 
-      <div className="flex-2 py-12">
+      <div className="flex py-12">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Header Info */}
           <div className="flex-1">
-            <h2 className="text-4xl mb-4 md:text-5xl font-medium text-secondary tracking-tight">
+            <h2 className="text-2xl mb-4 md:text-4xl font-medium text-secondary tracking-tight">
               {job_title}
             </h2>
             <h3 className="text-xl font-semibold text-terciary mb-4">
@@ -132,18 +132,13 @@ const JobExperience = ({
           </div>
 
           {/* Description and Tags */}
-          <div className="flex-2 flex flex-col gap-6">
-            <p className="font-light text-lg leading-relaxed text-secondary text-justify">
+          <div className="flex flex-col flex-2 gap-6">
+            <p className="font-normal text-lg leading-relaxed text-secondary text-justify">
               {description}
             </p>
             <div className="flex flex-wrap gap-2">
               {tags?.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-3 py-1 border border-terciary rounded-full text-[10px] text-terciary font-medium uppercase tracking-wider"
-                >
-                  {tag}
-                </span>
+                <Badge key={tag}>{tag}</Badge>
               ))}
             </div>
           </div>
@@ -168,7 +163,7 @@ export const JobsExperience = () => {
           ease: "power4.out",
           scrollTrigger: {
             trigger: item, // Each item is its own trigger
-            start: "top 75%", // Starts when the top of the item hits 85% of viewport
+            start: "top 85%", // Starts when the top of the item hits 85% of viewport
             // toggleActions: "play reverse play reverse",
           },
         });
