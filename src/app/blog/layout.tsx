@@ -5,7 +5,7 @@ export default function BlogLayout({
 }) {
   return (
     <div className="min-h-screen bg-primary font-sans text-secondary">
-      <main className="max-w-4xl mx-auto px-6 pt-16 pb-24">{children}</main>
+      <main className="w-[95%] mx-auto pt-16 pb-24">{children}</main>
     </div>
   );
 }
