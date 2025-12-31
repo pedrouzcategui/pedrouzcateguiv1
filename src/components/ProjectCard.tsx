@@ -19,14 +19,14 @@ const ProjectCard = ({ title, image, tags, category }: ProjectCardProps) => {
 
       {/* Content Area */}
       <div className="mt-4 flex flex-col gap-2">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-2">
             <h3 className="text-lg font-bold uppercase tracking-wider">
               {title}
             </h3>
           </div>
 
-          <div className="flex gap-2 text-[10px] font-medium uppercase tracking-widest ">
+          <div className="flex gap-2 text-[10px] font-normal uppercase tracking-widest ">
             <span>{category}</span>
             {" - "}
             <span>2025</span>
@@ -35,7 +35,9 @@ const ProjectCard = ({ title, image, tags, category }: ProjectCardProps) => {
 
         {/* Tags / Skills - Scrolling effect style */}
         <div className="overflow-hidden whitespace-nowrap">
-          <p className="text-sm uppercase font-light">{tags?.join(", ")}</p>
+          <p className="text-xs md:text-sm uppercase font-light">
+            {tags?.join(", ")}
+          </p>
         </div>
       </div>
     </div>

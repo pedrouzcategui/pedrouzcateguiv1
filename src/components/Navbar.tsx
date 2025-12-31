@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { type LucideIcon, Menu, SquareArrowOutUpRight, X } from "lucide-react";
 import Link from "next/link";
 import Announcement from "./Announcement";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 type MenuItem = {
   link: string;
@@ -49,7 +49,7 @@ const Navbar = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex">
-            <MenuItems isMobile={false} />
+            <MenuItems setIsOpen={setIsOpen} />
           </div>
 
           {/* Mobile Toggle Button */}
@@ -61,7 +61,7 @@ const Navbar = () => {
         {/* Mobile Dropdown Menu */}
         {isOpen && (
           <div className="md:hidden bg-primary border-b border-terciary p-4 flex flex-col gap-4">
-            <MenuItems isMobile />
+            <MenuItems isMobile setIsOpen={setIsOpen} />
           </div>
         )}
       </nav>
@@ -69,7 +69,12 @@ const Navbar = () => {
   );
 };
 
-const MenuItems = ({ isMobile = false }) => {
+type MenuItemsProps = {
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  isMobile?: boolean;
+};
+
+const MenuItems = ({ setIsOpen, isMobile = false }: MenuItemsProps) => {
   return (
     <div className={isMobile ? "flex flex-col gap-6" : "flex gap-12"}>
       {MENU_ITEMS.map(({ link, Icon, content, is_button }, i) => (
@@ -80,6 +85,7 @@ const MenuItems = ({ isMobile = false }) => {
             is_button && "bg-secondary text-primary rounded-4xl px-4 py-1 w-fit"
           )}
           href={link}
+          onClick={() => setIsOpen(false)}
         >
           {Icon && <Icon size={"16"} />}
           {content}
