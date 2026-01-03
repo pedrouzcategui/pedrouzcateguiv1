@@ -25,7 +25,7 @@ export default function RootLayout({
       <body className={`${spaceGrotesk.className} `}>
         <Navbar />
         <div className="min-h-screen h-full bg-primary">{children}</div>
-        {/* <Footer /> */}
+        <Footer />
       </body>
     </html>
   );

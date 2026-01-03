@@ -60,7 +60,7 @@ const Navbar = () => {
   return (
     /* The 'relative' wrapper ensures the space is reserved in the layout */
     <header className="relative h-[120px] w-full">
-      <nav className="fixed top-0 left-0 z-50 bg-primary w-full border-b border-terciary text-secondary">
+      <nav className="top-0 left-0 z-50 bg-primary w-full border-b border-terciary text-secondary">
         <Announcement>
           My new <b>FREE</b> GSAP course is here!
         </Announcement>
