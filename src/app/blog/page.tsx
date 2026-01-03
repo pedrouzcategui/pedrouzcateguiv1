@@ -9,6 +9,15 @@ export type PostMetadata = {
   excerpt: string;
 };
 
+export const metadata = {
+  title: "Blog | Pedro Uzcátegui",
+  description:
+    "Read my latest articles on software development, A.I, and life in general.",
+  alternates: {
+    canonical: "https://pedrouzcategui.com/blog",
+  },
+};
+
 export default async function BlogPage() {
   const postsx = await getPosts();
   return (
