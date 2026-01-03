@@ -29,16 +29,16 @@ export const metadata = {
 
 const App = () => {
   return (
-    <SmoothScrollProvider>
-      <div id="smooth-content">
-        <div className="w-[95%] mx-auto">
-          <Hero />
-          <Projects />
-          {/* <About /> */}
-          <JobsExperience />
-        </div>
+    // <SmoothScrollProvider>
+    <div id="smooth-content">
+      <div className="w-[95%] mx-auto">
+        <Hero />
+        <Projects />
+        {/* <About /> */}
+        <JobsExperience />
       </div>
-    </SmoothScrollProvider>
+    </div>
+    // </SmoothScrollProvider>
   );
 };
 

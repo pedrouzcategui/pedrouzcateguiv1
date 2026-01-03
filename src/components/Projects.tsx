@@ -9,7 +9,7 @@ const projects: ProjectCardProps[] = [
   {
     title: "Finance Manager",
     image: "kwik-finance-manager.png",
-    href: "/projects/project",
+    href: "/projects/project-alpha",
     tags: [
       "Docker",
       "Laravel",
@@ -23,7 +23,7 @@ const projects: ProjectCardProps[] = [
   {
     title: "Clash Royale A.I Agent",
     image: "clash-royale-automation.webp",
-    href: "/projects/project",
+    href: "/projects/project-gamma",
     tags: ["Python", "Android", "Tensorflow", "Pandas", "OpenCV"],
     category: "A.I Automation",
   },
@@ -36,7 +36,7 @@ const projects: ProjectCardProps[] = [
   {
     title: "Meowy",
     image: "cat-robot.webp",
-    href: "/projects/project",
+    href: "/projects/project-beta",
     tags: ["Linux", "Arduino", "C++", "Blender"],
     category: "Hardware Programming & 3D Design",
   },
