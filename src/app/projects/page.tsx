@@ -1,6 +1,5 @@
 import { getProjects } from "@/lib/projects.plugin";
 import ProjectCard from "@/components/ProjectCard";
-import SectionLabel from "@/components/SectionLabel";
 
 export type ProjectMetadata = {
   id: string;
@@ -22,12 +21,11 @@ export default async function ProjectsPage() {
 
   return (
     <>
-      <header className="text-center mb-12">
-        <SectionLabel>Projects</SectionLabel>
-        <p className="mt-4 text-gray-400">A selection of projects and demos.</p>
+      <header className="text-center mb-16">
+        <h1 className="text-4xl font-medium mb-6 tracking-tight">Projects</h1>
       </header>
 
-      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2">
         {projectsx.map((module: any) => {
           const metadata: ProjectMetadata = module.metadata ?? {};
           const slug = metadata.slug ?? metadata.id;

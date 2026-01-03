@@ -25,6 +25,10 @@ const MENU_ITEMS: MenuItem[] = [
     content: "Blog",
     link: "/blog",
   },
+  {
+    content: "Projects",
+    link: "/projects",
+  },
   // {
   //   content: "Case Studies",
   //   link: "/case-studies",

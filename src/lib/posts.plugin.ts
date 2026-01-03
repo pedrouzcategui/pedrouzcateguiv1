@@ -24,7 +24,18 @@ export async function getPosts(): Promise<any> {
       async (fileName) => await getBlogPostObject(fileName)
     );
     const posts = await Promise.all(postsPromises);
-    return posts;
+
+    // Filter out failed imports
+    const validPosts = posts.filter(Boolean);
+
+    // Sort by metadata.date descending
+    validPosts.sort((a: any, b: any) => {
+      const ad = a?.metadata?.date ? new Date(a.metadata.date).getTime() : 0;
+      const bd = b?.metadata?.date ? new Date(b.metadata.date).getTime() : 0;
+      return bd - ad;
+    });
+
+    return validPosts;
   } catch (error) {
     console.log("Error fetching posts: ", error);
     return null;
