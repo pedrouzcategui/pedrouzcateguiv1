@@ -1,23 +1,29 @@
+"use client";
 import ProjectCard, { ProjectCardProps } from "@/components/ProjectCard";
 import SectionLabel from "./SectionLabel";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import "swiper/css";
 
 const projects: ProjectCardProps[] = [
-  // {
-  //   title: "Finance Manager",
-  //   image: "kwik-finance-manager.png",
-  //   tags: [
-  //     "Docker",
-  //     "Laravel",
-  //     "ShadCN",
-  //     "React.js",
-  //     "Inertia.js",
-  //     "Tailwind.css",
-  //   ],
-  //   category: "Full Stack Web Development",
-  // },
+  {
+    title: "Finance Manager",
+    image: "kwik-finance-manager.png",
+    href: "/projects/project",
+    tags: [
+      "Docker",
+      "Laravel",
+      "ShadCN",
+      "React.js",
+      "Inertia.js",
+      "Tailwind.css",
+    ],
+    category: "Full Stack Web Development",
+  },
   {
     title: "Clash Royale A.I Agent",
     image: "clash-royale-automation.webp",
+    href: "/projects/project",
     tags: ["Python", "Android", "Tensorflow", "Pandas", "OpenCV"],
     category: "A.I Automation",
   },
@@ -30,6 +36,7 @@ const projects: ProjectCardProps[] = [
   {
     title: "Meowy",
     image: "cat-robot.webp",
+    href: "/projects/project",
     tags: ["Linux", "Arduino", "C++", "Blender"],
     category: "Hardware Programming & 3D Design",
   },
@@ -37,14 +44,38 @@ const projects: ProjectCardProps[] = [
 
 const Projects = () => {
   return (
-    <section id="projects" className="py-12 md:py-16">
+    <>
       <SectionLabel>Latest Projects</SectionLabel>
-      <div className="grid md:grid-cols-2 gap-2">
+      <Swiper
+        modules={[Autoplay]}
+        loop
+        slidesPerView={2}
+        spaceBetween={10}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        speed={300}
+        breakpoints={{
+          480: {
+            slidesPerView: 1,
+            spaceBetween: 30,
+          },
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+        }}
+        id="projects"
+        className="py-12 md:py-16"
+      >
         {projects.map((project, index) => (
-          <ProjectCard key={index} {...project} />
+          <SwiperSlide>
+            <ProjectCard key={index} {...project} />
+          </SwiperSlide>
         ))}
-      </div>
-    </section>
+      </Swiper>
+    </>
   );
 };
 

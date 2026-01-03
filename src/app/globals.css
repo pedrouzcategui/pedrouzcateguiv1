@@ -3,6 +3,19 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --accent: #ffd7a8;
+}
+
+::selection {
+  background: var(--accent);
+  color: black;
+  text-shadow: none;
+}
+
+::-moz-selection {
+  background: var(--accent);
+  color: black;
+  text-shadow: none;
 }
 
 @theme inline {

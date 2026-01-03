@@ -163,7 +163,7 @@ export const JobsExperience = () => {
           ease: "power4.out",
           scrollTrigger: {
             trigger: item, // Each item is its own trigger
-            start: "top 60%", // Starts when the top of the item hits 85% of viewport
+            start: "top 85%", // Starts when the top of the item hits 85% of viewport
             // toggleActions: "play reverse play reverse",
           },
         });

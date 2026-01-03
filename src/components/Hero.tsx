@@ -18,7 +18,7 @@ const Hero = () => {
       <h1 className="text-6xl lg:text-8xl xl:text-[10rem] font-bold">
         Pedro Uzcátegui
       </h1>
-      <h2 className="text-4xl font-light mt-2">AI & DevOps Engineer</h2>
+      <h2 className="text-4xl font-light mt-2">A.I Engineer</h2>
     </header>
   );
 };

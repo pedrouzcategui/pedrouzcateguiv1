@@ -7,8 +7,8 @@ export default function About() {
         <SectionLabel>About Me</SectionLabel>
         <div className="text-justify md:text-left lg:w-4/5">
           <p className="text-3xl/15 lg:text-6xl/20 text-secondary">
-            I help businesses transform through software, A.I and systems
-            re-design, saving them tens of thousands of dollars (and time).
+            <br />I make things, <br /> they don't work, <br /> I fix them,{" "}
+            <br /> they work.
           </p>
         </div>
       </div>

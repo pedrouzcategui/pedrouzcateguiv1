@@ -1,34 +1,55 @@
 "use client";
 import clsx from "clsx";
-import { type LucideIcon, Menu, SquareArrowOutUpRight, X } from "lucide-react";
+import {
+  GithubIcon,
+  type LucideIcon,
+  MailIcon,
+  Menu,
+  SquareArrowOutUpRight,
+  X,
+  YoutubeIcon,
+} from "lucide-react";
 import Link from "next/link";
 import Announcement from "./Announcement";
 import { Dispatch, SetStateAction, useState } from "react";
 
 type MenuItem = {
   link: string;
-  content: string;
+  content?: string;
   Icon?: LucideIcon;
   is_button?: boolean;
 };
 
 const MENU_ITEMS: MenuItem[] = [
   {
-    content: "Home",
-    link: "/",
-  },
-  {
     content: "Blog",
     link: "/blog",
   },
+  // {
+  //   content: "Case Studies",
+  //   link: "/case-studies",
+  // },
   {
-    content: "Case Studies",
-    link: "/case-studies",
-  },
-  {
-    content: "See Resume",
+    content: "Resume",
     link: "/pedro-uzcategui-resume.pdf",
     Icon: SquareArrowOutUpRight,
+  },
+  {
+    // content: "Github",
+    link: "https://github.com/pedrouzcategui",
+    Icon: GithubIcon,
+    is_button: true,
+  },
+  {
+    // content: "Github",
+    link: "https://www.youtube.com/@rowancodes",
+    Icon: YoutubeIcon,
+    is_button: true,
+  },
+  {
+    // content: "Github",
+    link: "mailto:hi@pedrouzcategui.com",
+    Icon: MailIcon,
     is_button: true,
   },
 ];
@@ -45,7 +66,9 @@ const Navbar = () => {
         </Announcement>
 
         <div className="w-[95%] mx-auto py-6 flex justify-between items-center">
-          <p className="font-bold">Pedro Uzcátegui</p>
+          <Link href={"/"} className="font-bold">
+            Pedro Uzcátegui
+          </Link>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex">
@@ -76,13 +99,13 @@ type MenuItemsProps = {
 
 const MenuItems = ({ setIsOpen, isMobile = false }: MenuItemsProps) => {
   return (
-    <div className={isMobile ? "flex flex-col gap-6" : "flex gap-12"}>
+    <div className={isMobile ? "flex flex-col gap-6" : "flex gap-6"}>
       {MENU_ITEMS.map(({ link, Icon, content, is_button }, i) => (
         <Link
           key={`menu-item-${i}`}
           className={clsx(
             "flex items-center gap-2 transition-colors hover:text-opacity-80",
-            is_button && "bg-secondary text-primary rounded-4xl px-4 py-1 w-fit"
+            is_button && "bg-secondary text-primary rounded-4xl p-2 w-fit"
           )}
           href={link}
           onClick={() => setIsOpen(false)}

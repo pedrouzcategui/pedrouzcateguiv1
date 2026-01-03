@@ -10,8 +10,8 @@ const App = () => {
       <div id="smooth-content">
         <div className="w-[95%] mx-auto">
           <Hero />
-          <About />
           <Projects />
+          {/* <About /> */}
           <JobsExperience />
         </div>
       </div>
