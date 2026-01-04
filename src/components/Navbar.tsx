@@ -15,6 +15,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 
 type MenuItem = {
   link: string;
+  external?: boolean;
   content?: string;
   Icon?: LucideIcon;
   is_button?: boolean;
@@ -37,24 +38,28 @@ const MENU_ITEMS: MenuItem[] = [
     content: "Resume",
     link: "/pedro-uzcategui-resume.pdf",
     Icon: SquareArrowOutUpRight,
+    external: true,
   },
   {
     // content: "Github",
     link: "https://github.com/pedrouzcategui",
     Icon: GithubIcon,
     is_button: true,
+    external: true,
   },
   {
     // content: "Github",
-    link: "https://www.youtube.com/@rowancodes",
+    link: "https://www.youtube.com/@curiousvirtuosity",
     Icon: YoutubeIcon,
     is_button: true,
+    external: true,
   },
   {
     // content: "Github",
     link: "mailto:hi@pedrouzcategui.com",
     Icon: MailIcon,
     is_button: true,
+    external: true,
   },
 ];
 
@@ -104,7 +109,7 @@ type MenuItemsProps = {
 const MenuItems = ({ setIsOpen, isMobile = false }: MenuItemsProps) => {
   return (
     <div className={isMobile ? "flex flex-col gap-6" : "flex gap-6"}>
-      {MENU_ITEMS.map(({ link, Icon, content, is_button }, i) => (
+      {MENU_ITEMS.map(({ link, Icon, content, is_button, external }, i) => (
         <Link
           key={`menu-item-${i}`}
           className={clsx(
@@ -112,6 +117,7 @@ const MenuItems = ({ setIsOpen, isMobile = false }: MenuItemsProps) => {
             is_button && "bg-secondary text-primary rounded-4xl p-2 w-fit"
           )}
           href={link}
+          target={external ? "_blank" : "_self"}
           onClick={() => setIsOpen(false)}
         >
           {Icon && <Icon size={"16"} />}

@@ -1,0 +1,73 @@
+{
+  "metadata": {
+    "title": "Pedro Uzcátegui - A.I Engineer",
+    "description": "Pedro Uzcátegui Personal Website",
+    "homeTitle": "Pedro Uzcátegui | A.I Engineer",
+    "homeDescription": "Pedro Uzcátegui is a software engineer focused on A.I and open source applications",
+    "ogTitle": "Pedro Uzcátegui",
+    "ogType": "website",
+    "blogTitle": "Blog | Pedro Uzcátegui",
+    "blogDescription": "Read my latest articles on software development, A.I, and life in general.",
+    "projectsTitle": "Projects | Pedro Uzcátegui",
+    "projectsDescription": "Showcase of projects.",
+    "blogPostNotFound": "Post Not Found | Pedro Uzcátegui"
+  },
+  "hero": {
+    "name": "Pedro Uzcátegui",
+    "title": "A.I Engineer"
+  },
+  "sections": {
+    "latestProjects": "Latest Projects",
+    "workExperience": "Work Experience",
+    "blog": "Blog",
+    "projects": "Projects",
+    "caseStudies": "Case Studies"
+  },
+  "projects": {
+    "financeManager": "Finance Manager",
+    "financeManagerCategory": "Full Stack Web Development",
+    "clashRoyale": "Clash Royale A.I Agent",
+    "clashRoyaleCategory": "A.I Automation",
+    "meowy": "Meowy",
+    "meowyCategory": "Hardware Programming & 3D Design",
+    "category": "Project"
+  },
+  "jobs": {
+    "present": "Present",
+    "operationsSpecialist": "Operations Specialist",
+    "gymMemberMachine": "Gym Member Machine",
+    "operationsDescription": "I'm now deeply involved in crucial company projects, collaborating closely with other departments. My focus has broadened from solely building automations to also critically evaluating the strategic value and implementation feasibility of departmental requests.",
+    "automationSpecialist": "Automation Specialist",
+    "automationDescription": "As an automation specialist, I bring expertise in utilizing various tools such as GoHighLevel, ClickUp, Airtable, Make, and Zapier to streamline processes. Additionally, I possess the ability to code custom automations, work with APIs, and resolve client issues through effective communication and troubleshooting. With a strong focus on optimizing efficiency, I am committed to delivering exceptional results that drive business success.",
+    "fullStackWebDeveloper": "Full Stack Web Developer",
+    "ingeniust": "Ingeniust",
+    "fullStackWebDescription": "Helped build a rental car and boat rental applications using React.js, Vue.js, Laravel, Redux, component design with Storybook, as well as the usage of SSH, FTPs, and Linux for deployment.",
+    "fullStackDeveloper": "Full Stack Developer",
+    "chaseBSnow": "Chase B Snow Consulting",
+    "fullStackDescription": "Working with Integromat/Make, APIs and QA Testing for our clients. Created multiple integrations using Slack, Facebook Marketing (Insights) API, GoHighLevel, ClickUp, Google Spreadsheets and a lot more of APIs. Also developed a GHL Theme Customizer with React.js to modify dashboards."
+  },
+  "navbar": {
+    "blog": "Blog",
+    "projects": "Projects",
+    "caseStudies": "Case Studies",
+    "resume": "Resume",
+    "announcement": "My new <b>FREE</b> GSAP course is here!"
+  },
+  "footer": {
+    "copyright": "&copy; {year} Pedro Uzcátegui."
+  },
+  "projectCard": {
+    "year": "2025"
+  },
+  "notFound": {
+    "title": "Not Found",
+    "description": "Could not find requested resource",
+    "returnHome": "Return Home"
+  },
+  "caseStudies": {
+    "title": "This is the title of the case study",
+    "paragraph": "This is a paragraph of what was done in this Case Study",
+    "categories": ["This", "Are", "The", "Categories"],
+    "link": "Link to read the case study"
+  }
+}

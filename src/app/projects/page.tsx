@@ -4,6 +4,7 @@ import ProjectCard from "@/components/ProjectCard";
 export type ProjectMetadata = {
   id: string;
   slug: string;
+  image: string;
   title: string;
   date?: string;
   excerpt?: string;
@@ -30,6 +31,7 @@ export default async function ProjectsPage() {
           const metadata: ProjectMetadata = module.metadata ?? {};
           const slug = metadata.slug ?? metadata.id;
           const title = metadata.title ?? slug;
+          const image = metadata.image ?? "slug";
           const tags = metadata.tech ?? [];
           const category = "Project";
 
@@ -37,7 +39,7 @@ export default async function ProjectsPage() {
             <ProjectCard
               key={metadata.id ?? slug}
               title={title}
-              image={`${slug}.png`}
+              image={`${image}`}
               href={`/projects/${slug}`}
               tags={tags}
               category={category}

@@ -1,0 +1,73 @@
+{
+  "metadata": {
+    "title": "Pedro Uzcátegui - Ingénieur I.A",
+    "description": "Site web personnel de Pedro Uzcátegui",
+    "homeTitle": "Pedro Uzcátegui | Ingénieur I.A",
+    "homeDescription": "Pedro Uzcátegui est un ingénieur logiciel spécialisé dans l'I.A et les applications open source",
+    "ogTitle": "Pedro Uzcátegui",
+    "ogType": "site web",
+    "blogTitle": "Blog | Pedro Uzcátegui",
+    "blogDescription": "Lisez mes derniers articles sur le développement logiciel, l'I.A, et la vie en général.",
+    "projectsTitle": "Projets | Pedro Uzcátegui",
+    "projectsDescription": "Vitrine de projets.",
+    "blogPostNotFound": "Article non trouvé | Pedro Uzcátegui"
+  },
+  "hero": {
+    "name": "Pedro Uzcátegui",
+    "title": "Ingénieur I.A"
+  },
+  "sections": {
+    "latestProjects": "Derniers Projets",
+    "workExperience": "Expérience Professionnelle",
+    "blog": "Blog",
+    "projects": "Projets",
+    "caseStudies": "Études de Cas"
+  },
+  "projects": {
+    "financeManager": "Gestionnaire Financier",
+    "financeManagerCategory": "Développement Web Full Stack",
+    "clashRoyale": "Agent I.A Clash Royale",
+    "clashRoyaleCategory": "Automatisation I.A",
+    "meowy": "Meowy",
+    "meowyCategory": "Programmation Matérielle et Conception 3D",
+    "category": "Projet"
+  },
+  "jobs": {
+    "present": "Présent",
+    "operationsSpecialist": "Spécialiste des Opérations",
+    "gymMemberMachine": "Gym Member Machine",
+    "operationsDescription": "Je suis maintenant profondément impliqué dans des projets cruciaux de l'entreprise, collaborant étroitement avec d'autres départements. Mon focus s'est élargi de la seule construction d'automatisations à l'évaluation critique de la valeur stratégique et de la faisabilité d'implémentation des demandes départementales.",
+    "automationSpecialist": "Spécialiste de l'Automatisation",
+    "automationDescription": "En tant que spécialiste de l'automatisation, j'apporte une expertise dans l'utilisation d'outils variés tels que GoHighLevel, ClickUp, Airtable, Make et Zapier pour rationaliser les processus. De plus, je possède la capacité de coder des automatisations personnalisées, travailler avec des APIs et résoudre les problèmes clients grâce à une communication efficace et au dépannage. Avec un focus fort sur l'optimisation de l'efficacité, je m'engage à livrer des résultats exceptionnels qui stimulent le succès commercial.",
+    "fullStackWebDeveloper": "Développeur Web Full Stack",
+    "ingeniust": "Ingeniust",
+    "fullStackWebDescription": "A aidé à construire des applications de location de voitures et de bateaux en utilisant React.js, Vue.js, Laravel, Redux, conception de composants avec Storybook, ainsi que l'utilisation de SSH, FTP et Linux pour le déploiement.",
+    "fullStackDeveloper": "Développeur Full Stack",
+    "chaseBSnow": "Chase B Snow Consulting",
+    "fullStackDescription": "Travaillant avec Integromat/Make, APIs et Tests QA pour nos clients. Créé plusieurs intégrations utilisant Slack, API Facebook Marketing (Insights), GoHighLevel, ClickUp, Google Spreadsheets et bien d'autres APIs. Aussi développé un Personnalisateur de Thème GHL avec React.js pour modifier les tableaux de bord."
+  },
+  "navbar": {
+    "blog": "Blog",
+    "projects": "Projets",
+    "caseStudies": "Études de Cas",
+    "resume": "CV",
+    "announcement": "Mon nouveau cours <b>GRATUIT</b> GSAP est ici !"
+  },
+  "footer": {
+    "copyright": "&copy; {year} Pedro Uzcátegui."
+  },
+  "projectCard": {
+    "year": "2025"
+  },
+  "notFound": {
+    "title": "Non Trouvé",
+    "description": "Impossible de trouver la ressource demandée",
+    "returnHome": "Retour à l'Accueil"
+  },
+  "caseStudies": {
+    "title": "Ceci est le titre de l'étude de cas",
+    "paragraph": "Ceci est un paragraphe de ce qui a été fait dans cette Étude de Cas",
+    "categories": ["Ceci", "Sont", "Les", "Catégories"],
+    "link": "Lien pour lire l'étude de cas"
+  }
+}
