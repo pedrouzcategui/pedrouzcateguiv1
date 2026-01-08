@@ -9,8 +9,6 @@ export const metadata = {
   category: "Data Science and Data Analysis",
 };
 
-# Good Housing Deals
-
 Good Housing Deals is a data-driven platform that helps users evaluate real estate listings for value and potential. It uses Python to analyze housing data, Playwright for web scraping, FastAPI for the backend, and UV for virtual environment.
 
 ## Features
@@ -25,3 +23,23 @@ Good Housing Deals is a data-driven platform that helps users evaluate real esta
 ## Why did I build this?
 
 I built Good Housing Deals to help people make informed decisions when buying real estate. The housing market can be complex and overwhelming, and I wanted to create a tool that simplifies the process of evaluating listings. By leveraging data analysis and computer vision, I aimed to provide users with insights that go beyond just the listing price, helping them find properties that offer true value.
+
+## Development Story
+
+I will publish a YouTube video most likely that explains this project on detail, including the technical aspects of web scraping, data analysis, and computer vision. But if you want to keep reading, here is a human version of this.
+
+### The idea
+
+I am looking to move out of my home, however, I do not have all of the money in the world to do. So I just need to find a good deal. I was looking at Facebook Marketplace and Mercadolibre for apartments, however, I was not sure if the price was good or not. So I thought to myself, why not build a tool that can help me with that?
+
+### The data
+
+I started by scraping data from various real estate listing websites using Playwright. I focused on gathering information such as price, location, number of bedrooms and bathrooms, square footage, and images of the interiors. This data was then stored in a structured format for analysis.
+
+#### The first roadblock: Anti-scraping measures and solutions
+
+I was able to figure out how to scrape the entire data from my main city, however, when I kept running the scraper, the first thing that I saw was a login screen, and at that moment, it clicked: My IP is compromised.
+
+### The solution: Rotating Proxies, Human-like interactions, and headers change
+
+[WIP
