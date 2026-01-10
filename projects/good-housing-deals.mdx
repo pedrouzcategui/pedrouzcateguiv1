@@ -42,4 +42,82 @@ I was able to figure out how to scrape the entire data from my main city, howeve
 
 ### The solution: Rotating Proxies, Human-like interactions, and headers change
 
-[WIP
+#### Fixing the scroll
+
+The first thing I thought, was: _Ok, so it seems that the scroll is just to bot like, I need to convert this to something more human..._
+
+Then, I learned that you could use JavaScript evals with Playwright, and what I did, was to perform an eval (which could be seen as just executing code in the devtools) to perform a smooth scroll.
+
+```py
+async def scroll_like_human(page: Page, pause: float = 1.5, max_scrolls: int = 30) -> None:
+    # This gets the scroll height of the body of the page
+    previous_height = await page.evaluate("document.body.scrollHeight")
+
+    for i in range(max_scrolls):
+        # 1. Smooth scroll relative to current position
+
+        scroll_amount = random.randint(500, 800)
+        # 2. This evaluation simulates a smooth scroll by a random amount
+        await page.evaluate(f"""
+            window.scrollBy({{
+                top: {scroll_amount},
+                behavior: 'smooth'
+            }});
+        """)
+
+        # 2. Wait for the smooth animation AND the network
+        await asyncio.sleep(pause)
+
+        # 3. Check if we actually moved or if height grew
+        new_height = await page.evaluate("document.body.scrollHeight")
+        current_scroll_pos = await page.evaluate("window.pageYOffset + window.innerHeight")
+
+        # Logic: If height hasn't changed AND we are at the bottom, we are done
+        if new_height == previous_height and current_scroll_pos >= new_height:
+            print("Reached the end of the page.")
+            break
+
+        previous_height = new_heightpage.eval(r"() => {}")
+```
+
+This piece of code made it so the scroll looks human like! The good part is that I can re-use this particular piece of code anytime I need to scroll on a page.
+
+#### Random values are your friends!
+
+Now, the thing with human movements, is that they are `random`.
+
+Bot detection usually checks things like the time you stay on a page, your scroll, your mouse movements, and if these are very predictable, they will usually flag your IP (and blacklist it in the worst cases)
+
+I changed the code so instead of relying on fixed values, instead, I rely on random ranges, this approach seems to work very well!
+
+#### Keystrokes vs Fill
+
+Now, I was using "fill" to fill the searchbox on the website I scrape, however, this again, is robot-like, and what we want, is human-like behavior. Therefore, I used the `page.keystroke()` method to emulate a keystroke, with a random value from 1.5 seconds to 2.5 seconds.
+
+#### Clicking instead of Redirecting
+
+Humans click on things, they do not copy the href and then paste it in the URL bar, therefore, what I changed was important: progressively clicking on the listings that are currently visible in the viewport.
+
+[Expand]
+
+This definitely was the most challenging part of this project lol, there is a lot of edge conditions to check.
+
+#### Proxies
+
+Now, the thing is that even though the bot is behaving like a human, if I want to run ALL cities, and ALL states, I cannot wait until one program finish, so I need to introduce multiple python agents that can do this.
+
+For this, I need to know the number of cities that my country has, which in this case, are \_\_\_.
+
+Therefore, what I did was to use this service for residential proxies, and then have multiple agents scrape said cites, so I can store all information I need to track individual locations prices.
+
+#### Headers
+
+### Cron Job Statuses, Sockets and Webhooks
+
+Now, I created the interface to make sure that I can just see the agents progress on the scraping, check if they failed and why, and then just store the relevant information (price change) for each of the apartments.
+
+Here, I created a Job that is executed in my server, and then, once its finished, it updates the status of a said city and state. If the scraping was successfully completed, it will show in the map.
+
+### The final result
+
+Now, here we have the full application that tracks the prices of each of the listings in Mercadolibre, as well as if they are still active or not in the platform, and it calculates the average per city, per state, and in the entire country too! Data is so nice.
