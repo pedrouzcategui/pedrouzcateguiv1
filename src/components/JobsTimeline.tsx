@@ -120,20 +120,20 @@ const JobExperience = ({
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Header Info */}
           <div className="flex-1">
-            <h2 className="text-2xl mb-4 md:text-4xl font-medium text-secondary tracking-tight">
+            <h2 className="text-2xl mb-4 md:text-4xl font-medium text-foreground tracking-tight">
               {job_title}
             </h2>
-            <h3 className="text-xl font-semibold text-terciary mb-4">
+            <h3 className="text-xl font-semibold text-foreground/70 mb-4">
               {company}
             </h3>
-            <span className="font-light text-sm text-terciary">
+            <span className="font-light text-sm text-foreground/60">
               {formatJobDate(from)} - {formatJobDate(to)}
             </span>
           </div>
 
           {/* Description and Tags */}
           <div className="flex flex-col flex-2 gap-6">
-            <p className="font-normal text-lg leading-relaxed text-secondary text-justify">
+            <p className="font-normal text-lg leading-relaxed text-foreground text-justify">
               {description}
             </p>
             <div className="flex flex-wrap gap-2">
@@ -169,7 +169,7 @@ export const JobsExperience = () => {
         });
       });
     },
-    { scope: containerRef }
+    { scope: containerRef },
   );
 
   return (

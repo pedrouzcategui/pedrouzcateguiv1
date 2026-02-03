@@ -6,7 +6,7 @@ type BadgeProps = {
 
 export default function Badge({ children }: BadgeProps) {
   return (
-    <span className="px-3 py-1 border border-terciary rounded-full text-xs text-terciary font-medium tracking-wider">
+    <span className="px-3 py-1 rounded-full text-xs font-medium tracking-wider bg-transparent border border-foreground/10 text-foreground/60">
       {children}
     </span>
   );

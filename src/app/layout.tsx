@@ -21,7 +21,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          id="theme-init"
+          dangerouslySetInnerHTML={{
+            __html: `(() => {try {const stored = localStorage.getItem("theme");const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;const theme = stored === "light" || stored === "dark" ? stored : (prefersDark ? "dark" : "light");document.documentElement.setAttribute("data-theme", theme);} catch (_) {}})();`,
+          }}
+        />
+      </head>
       <body className={`${spaceGrotesk.className} `}>
         <Navbar />
         <div className="min-h-screen h-full bg-primary">{children}</div>
