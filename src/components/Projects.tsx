@@ -1,11 +1,11 @@
 "use client";
-import ProjectCard, { ProjectCardProps } from "@/components/ProjectCard";
+import Card, { CardProps } from "@/components/Card";
 import SectionLabel from "./SectionLabel";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 
-const Projects = ({ projects }: { projects: ProjectCardProps[] }) => {
+const Projects = ({ projects }: { projects: CardProps[] }) => {
   return (
     <>
       <SectionLabel>Latest Projects</SectionLabel>
@@ -34,7 +34,7 @@ const Projects = ({ projects }: { projects: ProjectCardProps[] }) => {
       >
         {projects.map((project, index) => (
           <SwiperSlide key={index}>
-            <ProjectCard {...project} />
+            <Card {...project} />
           </SwiperSlide>
         ))}
       </Swiper>

@@ -1,5 +1,5 @@
 import { getProjects } from "@/lib/projects.plugin";
-import ProjectCard from "@/components/ProjectCard";
+import Card from "@/components/Card";
 
 export type ProjectMetadata = {
   id: string;
@@ -36,7 +36,7 @@ export default async function ProjectsPage() {
           const category = "Project";
 
           return (
-            <ProjectCard
+            <Card
               key={metadata.id ?? slug}
               title={title}
               image={`${image}`}
