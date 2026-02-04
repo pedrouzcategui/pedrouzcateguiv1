@@ -1,5 +1,6 @@
 import { workflows } from "./workflows";
 import Card from "@/components/Card";
+import Image from "next/image";
 
 export const metadata = {
   title: "n8n Templates | Pedro Uzcátegui",
@@ -37,25 +38,29 @@ const WorkflowCard = ({
       category="Template"
       tags={workflow.tags}
       media={
-        <div className="p-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              {workflow.apps.map((app) => (
-                <span
-                  key={app.id}
-                  className={`flex items-center justify-center size-9 rounded-lg ${app.bg}`}
-                >
-                  <span className="text-base">{app.icon}</span>
-                </span>
-              ))}
-            </div>
-            <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] font-medium text-white/70">
-              {workflow.stat}
-            </span>
+        <div>
+          <div className="relative aspect-[16/9] w-full overflow-hidden rounded-t-2xl bg-black/20">
+            <Image
+              src={"/n8n-example-workflow.webp"}
+              alt="n8n workflow example"
+              fill
+              className="object-cover"
+              sizes="(min-width: 640px) 50vw, 100vw"
+              priority={false}
+            />
           </div>
-          <p className="mt-4 text-xs md:text-sm text-gray-400">
-            {workflow.description}
-          </p>
+
+          <div className="p-4">
+            <div className="flex items-center justify-between">
+              <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] font-medium text-white/70">
+                {workflow.stat}
+              </span>
+            </div>
+
+            <p className="mt-4 text-xs md:text-sm text-gray-400">
+              {workflow.description}
+            </p>
+          </div>
         </div>
       }
     />
