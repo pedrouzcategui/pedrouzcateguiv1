@@ -55,6 +55,7 @@ const MENU_ITEMS: MenuItem[] = [
     // content: "Github",
     link: "https://github.com/pedrouzcategui",
     Icon: GithubIcon,
+    content: "GitHub",
     is_button: true,
     external: true,
   },
@@ -62,6 +63,7 @@ const MENU_ITEMS: MenuItem[] = [
     // content: "Github",
     link: "https://www.youtube.com/@curiousvirtuosity",
     Icon: YoutubeIcon,
+    content: "YouTube",
     is_button: true,
     external: true,
   },
@@ -69,6 +71,7 @@ const MENU_ITEMS: MenuItem[] = [
     // content: "Github",
     link: "mailto:hi@pedrouzcategui.com",
     Icon: MailIcon,
+    content: "Email",
     is_button: true,
     external: true,
   },
@@ -121,7 +124,7 @@ const Navbar = () => {
   return (
     /* The 'relative' wrapper ensures the space is reserved in the layout */
     <header className="relative h-[120px] w-full">
-      <nav className="top-0 left-0 z-50 bg-primary w-full border-b border-terciary text-secondary">
+      <nav className="fixed top-0 left-0 z-50 bg-primary w-full border-b border-terciary text-secondary">
         <Announcement>
           My new <b>FREE</b> n8n course is coming!
         </Announcement>
@@ -149,13 +152,15 @@ const Navbar = () => {
 
         {/* Mobile Dropdown Menu */}
         {isOpen && (
-          <div className="md:hidden bg-primary border-b border-terciary p-4 flex flex-col gap-4">
-            <MenuItems isMobile setIsOpen={setIsOpen} />
-            <ThemeToggle
-              theme={theme}
-              onToggle={toggleTheme}
-              label={themeLabel}
-            />
+          <div className="md:hidden absolute left-0 right-0 top-full z-40 bg-primary border-t border-terciary shadow-lg">
+            <div className="p-4 flex flex-col gap-4 max-h-[calc(100vh-120px)] overflow-y-auto">
+              <MenuItems isMobile setIsOpen={setIsOpen} />
+              <ThemeToggle
+                theme={theme}
+                onToggle={toggleTheme}
+                label={themeLabel}
+              />
+            </div>
           </div>
         )}
       </nav>
@@ -180,10 +185,15 @@ const MenuItems = ({ setIsOpen, isMobile = false }: MenuItemsProps) => {
           )}
           href={link}
           target={external ? "_blank" : "_self"}
+          rel={external ? "noopener noreferrer" : undefined}
           onClick={() => setIsOpen(false)}
         >
           {Icon && <Icon size={"16"} />}
-          {content}
+          {content ? (
+            <span className={clsx(is_button && !isMobile && "sr-only")}>
+              {content}
+            </span>
+          ) : null}
         </Link>
       ))}
     </div>
@@ -197,23 +207,37 @@ type ThemeToggleProps = {
 };
 
 const ThemeToggle = ({ theme, onToggle, label }: ThemeToggleProps) => {
-  const icon = theme === "dark" ? <Sun size={18} /> : <Moon size={18} />;
-
   return (
     <button
       type="button"
       aria-label={label}
       title={label}
       onClick={onToggle}
+      role="switch"
+      aria-checked={theme === "dark"}
       className={clsx(
-        "flex items-center gap-2 rounded-full border border-terciary px-3 py-2 text-sm transition-colors",
+        "inline-flex w-full md:w-auto items-center rounded-full border border-terciary p-1 text-sm transition-colors",
         "hover:bg-terciary/20",
       )}
       disabled={!theme}
     >
-      {icon}
-      <span className="hidden sm:inline">
-        {theme === "dark" ? "Light" : "Dark"}
+      <span
+        className={clsx(
+          "flex flex-1 justify-center md:flex-none items-center gap-2 rounded-full px-3 py-1 text-xs font-medium transition-colors",
+          theme === "light" ? "bg-secondary text-primary" : "text-secondary/70",
+        )}
+      >
+        <Sun size={14} />
+        Light
+      </span>
+      <span
+        className={clsx(
+          "flex flex-1 justify-center md:flex-none items-center gap-2 rounded-full px-3 py-1 text-xs font-medium transition-colors",
+          theme === "dark" ? "bg-secondary text-primary" : "text-secondary/70",
+        )}
+      >
+        <Moon size={14} />
+        Dark
       </span>
     </button>
   );
