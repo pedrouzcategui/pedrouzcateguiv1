@@ -13,8 +13,7 @@ export type N8NWorkflow = {
 export const workflows: N8NWorkflow[] = [
   {
     id: "fb-ads-gemini",
-    title:
-      "Analyze Facebook Ads & send insights to Google Sheets with Gemini AI",
+    title: "Upload HTML directly to Google Drive as Google Doc",
     description:
       "Pull campaigns, summarize performance with Gemini, and send a clean report to Sheets.",
     tags: ["Facebook Ads", "Gemini", "Google Sheets"],
@@ -54,8 +53,8 @@ export const workflows: N8NWorkflow[] = [
     ],
   },
   {
-    id: "receipt-analysis",
-    title: "Receipt scanning & analysis workflow",
+    id: "slack-command-center",
+    title: "Slack Command Center for Slack Block Kit Builder",
     description:
       "Collect receipts from Drive, extract totals, and organize them by vendor & month.",
     tags: ["Drive", "OCR", "Finance"],
@@ -96,7 +95,7 @@ export const workflows: N8NWorkflow[] = [
   },
   {
     id: "news-aggregator",
-    title: "Aggregate news articles into a database",
+    title: "HITL (Human in the loop) for research",
     description:
       "Sync headlines from multiple APIs, dedupe content, and publish a daily digest.",
     tags: ["NewsAPI", "Mediastack", "Database"],
@@ -137,7 +136,7 @@ export const workflows: N8NWorkflow[] = [
   },
   {
     id: "3d-body-model",
-    title: "Automate 3D body model generation from images",
+    title: "Multipart Body Request with N8N",
     description:
       "Process uploads, run SAM-3D, and store outputs in a project workspace.",
     tags: ["SAM-3D", "Images", "Google Sheets"],
@@ -177,52 +176,11 @@ export const workflows: N8NWorkflow[] = [
     ],
   },
   {
-    id: "sheets-onboarding",
-    title: "Get started with Google Sheets in n8n",
+    id: "e2e-slack-bot",
+    title: "E2E Slack Bot",
     description:
-      "Generate templates, push structured rows, and notify your team in minutes.",
-    tags: ["Google Sheets", "Onboarding", "Automation"],
-    apps: [
-      {
-        id: "sheets",
-        icon: "📄",
-        bg: "bg-emerald-500/15 text-emerald-200",
-        label: "Google Sheets",
-      },
-      {
-        id: "edit",
-        icon: "✍️",
-        bg: "bg-amber-500/15 text-amber-200",
-        label: "Formatter",
-      },
-      {
-        id: "chat",
-        icon: "💬",
-        bg: "bg-rose-500/15 text-rose-200",
-        label: "Slack/Chat",
-      },
-    ],
-    stat: "+4",
-    overview:
-      "Create a structured onboarding sheet, fill it with new hires, and alert the team automatically.",
-    requirements: [
-      "Google Sheets document",
-      "Team chat channel",
-      "New hire data source",
-    ],
-    steps: [
-      "Create or select a sheet template",
-      "Insert structured rows for each new hire",
-      "Format and validate fields",
-      "Notify the team with a link to the sheet",
-    ],
-  },
-  {
-    id: "voice-cloning",
-    title: "Automated AI voice cloning for YouTube to ElevenLabs",
-    description:
-      "Fetch new videos, clone voice, and upload a translated audio track.",
-    tags: ["YouTube", "ElevenLabs", "Google Sheets"],
+      "Process uploads, run SAM-3D, and store outputs in a project workspace.",
+    tags: ["SAM-3D", "Images", "Google Sheets"],
     apps: [
       {
         id: "sheets",
@@ -237,25 +195,25 @@ export const workflows: N8NWorkflow[] = [
         label: "HTTP Request",
       },
       {
-        id: "sync",
-        icon: "🔁",
-        bg: "bg-cyan-500/15 text-cyan-200",
-        label: "Automation",
+        id: "ai",
+        icon: "🤖",
+        bg: "bg-violet-500/15 text-violet-200",
+        label: "SAM-3D",
       },
     ],
-    stat: "+3",
+    stat: "+5",
     overview:
-      "Monitor a channel for new uploads, generate cloned voice tracks, and track delivery in Sheets.",
+      "Turn image uploads into 3D models and track delivery status in a shared workspace.",
     requirements: [
-      "YouTube API access",
-      "ElevenLabs API key",
-      "Translation or dubbing pipeline",
+      "Image upload form or storage bucket",
+      "SAM-3D inference endpoint",
+      "Project tracker sheet",
     ],
     steps: [
-      "Detect newly published videos",
-      "Generate the cloned voice audio",
-      "Upload or attach the translated track",
-      "Log everything in Sheets",
+      "Capture new image uploads",
+      "Send the images to SAM-3D for processing",
+      "Store the output model URL",
+      "Update the tracker with status and links",
     ],
   },
 ];

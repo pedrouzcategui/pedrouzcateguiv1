@@ -17,7 +17,7 @@ export default function N8NTemplatesPage() {
         </h1>
       </header>
 
-      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2">
+      <div className="grid auto-rows-fr items-stretch gap-6 grid-cols-1 sm:grid-cols-3">
         {workflows.map((workflow) => (
           <WorkflowCard key={workflow.id} workflow={workflow} />
         ))}
@@ -39,7 +39,7 @@ const WorkflowCard = ({
       tags={workflow.tags}
       media={
         <div>
-          <div className="relative aspect-[16/9] w-full overflow-hidden rounded-t-2xl bg-black/20">
+          <div className="relative aspect-video w-full overflow-hidden rounded-t-2xl bg-black/20">
             <Image
               src={"/n8n-example-workflow.webp"}
               alt="n8n workflow example"

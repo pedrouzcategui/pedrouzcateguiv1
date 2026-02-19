@@ -2,6 +2,7 @@
 import clsx from "clsx";
 import {
   ChevronDown,
+  CodeIcon,
   GithubIcon,
   type LucideIcon,
   MailIcon,
@@ -53,6 +54,7 @@ const RESOURCES_ITEMS: MenuItem[] = [
   {
     link: "/programming-challenges",
     content: "Programming Challenges",
+    Icon: CodeIcon,
     external: false,
   },
 ];
@@ -217,9 +219,7 @@ type MenuItemsProps = {
 const MenuItems = ({ setIsOpen, isMobile = false }: MenuItemsProps) => {
   return (
     <div
-      className={
-        isMobile ? "flex flex-col gap-6" : "flex items-center gap-6"
-      }
+      className={isMobile ? "flex flex-col gap-6" : "flex items-center gap-6"}
     >
       {NAV_ITEMS.map((navItem, i) => {
         if (navItem.type === "dropdown") {
