@@ -1,6 +1,7 @@
 "use client";
 import clsx from "clsx";
 import {
+  ChevronDown,
   GithubIcon,
   type LucideIcon,
   MailIcon,
@@ -14,7 +15,14 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Announcement from "./Announcement";
-import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
 type MenuItem = {
   link: string;
@@ -24,56 +32,89 @@ type MenuItem = {
   is_button?: boolean;
 };
 
-const MENU_ITEMS: MenuItem[] = [
+type NavItem =
+  | {
+      type: "link";
+      item: MenuItem;
+    }
+  | {
+      type: "dropdown";
+      label: string;
+      items: MenuItem[];
+    };
+
+const RESOURCES_ITEMS: MenuItem[] = [
   {
-    content: "Blog",
-    link: "/blog",
-  },
-  {
-    content: "Projects",
-    link: "/projects",
-  },
-  // {
-  //   content: "Case Studies",
-  //   link: "/case-studies",
-  // },
-  {
-    content: "Resume",
-    link: "/pedro-uzcategui-resume.pdf",
-    Icon: SquareArrowOutUpRight,
-    external: true,
-  },
-  {
-    // content: "N8N Templates",
     link: "/n8n",
-    content: "n8n Templates",
+    content: "n8n Workflows",
     Icon: WorkflowIcon,
-    is_button: false,
     external: false,
   },
   {
-    // content: "Github",
-    link: "https://github.com/pedrouzcategui",
-    Icon: GithubIcon,
-    content: "GitHub",
-    is_button: true,
-    external: true,
+    link: "/programming-challenges",
+    content: "Programming Challenges",
+    external: false,
+  },
+];
+
+const NAV_ITEMS: NavItem[] = [
+  {
+    type: "link",
+    item: {
+      content: "Blog",
+      link: "/blog",
+    },
   },
   {
-    // content: "Github",
-    link: "https://www.youtube.com/@curiousvirtuosity",
-    Icon: YoutubeIcon,
-    content: "YouTube",
-    is_button: true,
-    external: true,
+    type: "link",
+    item: {
+      content: "Projects",
+      link: "/projects",
+    },
   },
   {
-    // content: "Github",
-    link: "mailto:hi@pedrouzcategui.com",
-    Icon: MailIcon,
-    content: "Email",
-    is_button: true,
-    external: true,
+    type: "dropdown",
+    label: "Resources",
+    items: RESOURCES_ITEMS,
+  },
+  {
+    type: "link",
+    item: {
+      content: "Resume",
+      link: "/pedro-uzcategui-resume.pdf",
+      Icon: SquareArrowOutUpRight,
+      external: true,
+    },
+  },
+  {
+    type: "link",
+    item: {
+      link: "https://github.com/pedrouzcategui",
+      Icon: GithubIcon,
+      content: "GitHub",
+      is_button: true,
+      external: true,
+    },
+  },
+  {
+    type: "link",
+    item: {
+      link: "https://www.youtube.com/@curiousvirtuosity",
+      Icon: YoutubeIcon,
+      content: "YouTube",
+      is_button: true,
+      external: true,
+    },
+  },
+  {
+    type: "link",
+    item: {
+      link: "mailto:hi@pedrouzcategui.com",
+      Icon: MailIcon,
+      content: "Email",
+      is_button: true,
+      external: true,
+    },
   },
 ];
 
@@ -175,27 +216,174 @@ type MenuItemsProps = {
 
 const MenuItems = ({ setIsOpen, isMobile = false }: MenuItemsProps) => {
   return (
-    <div className={isMobile ? "flex flex-col gap-6" : "flex gap-6"}>
-      {MENU_ITEMS.map(({ link, Icon, content, is_button, external }, i) => (
-        <Link
-          key={`menu-item-${i}`}
+    <div
+      className={
+        isMobile ? "flex flex-col gap-6" : "flex items-center gap-6"
+      }
+    >
+      {NAV_ITEMS.map((navItem, i) => {
+        if (navItem.type === "dropdown") {
+          return (
+            <ResourcesDropdown
+              key={`nav-item-${i}`}
+              isMobile={isMobile}
+              setIsOpen={setIsOpen}
+              label={navItem.label}
+              items={navItem.items}
+            />
+          );
+        }
+
+        const { link, Icon, content, is_button, external } = navItem.item;
+        return (
+          <Link
+            key={`nav-item-${i}`}
+            className={clsx(
+              "inline-flex items-center gap-2 transition-colors hover:text-opacity-80 leading-none",
+              is_button
+                ? "bg-secondary text-primary rounded-4xl p-2 w-fit"
+                : "py-2",
+            )}
+            href={link}
+            target={external ? "_blank" : "_self"}
+            rel={external ? "noopener noreferrer" : undefined}
+            onClick={() => setIsOpen(false)}
+          >
+            {Icon && <Icon size={"16"} />}
+            {content ? (
+              <span className={clsx(is_button && !isMobile && "sr-only")}>
+                {content}
+              </span>
+            ) : null}
+          </Link>
+        );
+      })}
+    </div>
+  );
+};
+
+type ResourcesDropdownProps = {
+  isMobile: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  label: string;
+  items: MenuItem[];
+};
+
+const ResourcesDropdown = ({
+  isMobile,
+  setIsOpen,
+  label,
+  items,
+}: ResourcesDropdownProps) => {
+  const [isResourcesOpen, setIsResourcesOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!isResourcesOpen) return;
+    const onPointerDown = (event: MouseEvent) => {
+      const el = containerRef.current;
+      if (!el) return;
+      if (event.target instanceof Node && !el.contains(event.target)) {
+        setIsResourcesOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onPointerDown);
+    return () => document.removeEventListener("mousedown", onPointerDown);
+  }, [isResourcesOpen]);
+
+  const dropdownPanelClassName = isMobile
+    ? clsx(
+        "mt-2 flex flex-col gap-2 pl-4 border-l border-terciary",
+        !isResourcesOpen && "hidden",
+      )
+    : clsx(
+        "min-w-[220px] rounded-lg border border-terciary bg-primary p-2 shadow-lg",
+        !isResourcesOpen && "hidden",
+      );
+
+  return (
+    <div
+      ref={containerRef}
+      className={clsx(!isMobile && "relative", isMobile && "flex flex-col")}
+      onMouseEnter={() => {
+        if (!isMobile) setIsResourcesOpen(true);
+      }}
+      onMouseLeave={() => {
+        if (!isMobile) setIsResourcesOpen(false);
+      }}
+    >
+      <button
+        type="button"
+        aria-haspopup="menu"
+        aria-expanded={isResourcesOpen}
+        onClick={() => setIsResourcesOpen((v) => !v)}
+        onKeyDown={(e) => {
+          if (e.key === "Escape") setIsResourcesOpen(false);
+        }}
+        className={clsx(
+          "inline-flex items-center gap-2 transition-colors hover:text-opacity-80 leading-none py-2",
+          isMobile && "w-fit",
+        )}
+      >
+        <span>{label}</span>
+        <ChevronDown
+          size={16}
           className={clsx(
-            "flex items-center gap-2 transition-colors hover:text-opacity-80",
-            is_button && "bg-secondary text-primary rounded-4xl p-2 w-fit",
+            "transition-transform translate-y-px",
+            isResourcesOpen && "rotate-180",
           )}
-          href={link}
-          target={external ? "_blank" : "_self"}
-          rel={external ? "noopener noreferrer" : undefined}
-          onClick={() => setIsOpen(false)}
-        >
-          {Icon && <Icon size={"16"} />}
-          {content ? (
-            <span className={clsx(is_button && !isMobile && "sr-only")}>
-              {content}
-            </span>
-          ) : null}
-        </Link>
-      ))}
+        />
+      </button>
+
+      {isMobile ? (
+        <div className={dropdownPanelClassName} role="menu">
+          {items.map(({ link, Icon, content, external }, i) => (
+            <Link
+              key={`resources-item-${i}`}
+              href={link}
+              target={external ? "_blank" : "_self"}
+              rel={external ? "noopener noreferrer" : undefined}
+              role="menuitem"
+              className={clsx(
+                "flex items-center gap-2 rounded-md px-3 py-2 transition-colors",
+                "hover:bg-terciary/20",
+              )}
+              onClick={() => {
+                setIsResourcesOpen(false);
+                setIsOpen(false);
+              }}
+            >
+              {Icon && <Icon size={16} />}
+              <span>{content}</span>
+            </Link>
+          ))}
+        </div>
+      ) : (
+        <div className="absolute left-0 top-full pt-2">
+          <div className={dropdownPanelClassName} role="menu">
+            {items.map(({ link, Icon, content, external }, i) => (
+              <Link
+                key={`resources-item-${i}`}
+                href={link}
+                target={external ? "_blank" : "_self"}
+                rel={external ? "noopener noreferrer" : undefined}
+                role="menuitem"
+                className={clsx(
+                  "flex items-center gap-2 rounded-md px-3 py-2 transition-colors",
+                  "hover:bg-terciary/20",
+                )}
+                onClick={() => {
+                  setIsResourcesOpen(false);
+                  setIsOpen(false);
+                }}
+              >
+                {Icon && <Icon size={16} />}
+                <span>{content}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
