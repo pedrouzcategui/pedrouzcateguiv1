@@ -216,4 +216,86 @@ export const workflows: N8NWorkflow[] = [
       "Update the tracker with status and links",
     ],
   },
+  {
+    id: "files-to-ai",
+    title: "Use Files into your favorite A.I models",
+    description:
+      "Process uploads, run SAM-3D, and store outputs in a project workspace.",
+    tags: ["SAM-3D", "Images", "Google Sheets"],
+    apps: [
+      {
+        id: "sheets",
+        icon: "📄",
+        bg: "bg-emerald-500/15 text-emerald-200",
+        label: "Google Sheets",
+      },
+      {
+        id: "web",
+        icon: "🌐",
+        bg: "bg-sky-500/15 text-sky-200",
+        label: "HTTP Request",
+      },
+      {
+        id: "ai",
+        icon: "🤖",
+        bg: "bg-violet-500/15 text-violet-200",
+        label: "SAM-3D",
+      },
+    ],
+    stat: "+5",
+    overview:
+      "Turn image uploads into 3D models and track delivery status in a shared workspace.",
+    requirements: [
+      "Image upload form or storage bucket",
+      "SAM-3D inference endpoint",
+      "Project tracker sheet",
+    ],
+    steps: [
+      "Capture new image uploads",
+      "Send the images to SAM-3D for processing",
+      "Store the output model URL",
+      "Update the tracker with status and links",
+    ],
+  },
+    {
+    id: "error-catcher",
+    title: "Catch all errors",
+    description:
+      "Process uploads, run SAM-3D, and store outputs in a project workspace.",
+    tags: ["SAM-3D", "Images", "Google Sheets"],
+    apps: [
+      {
+        id: "sheets",
+        icon: "📄",
+        bg: "bg-emerald-500/15 text-emerald-200",
+        label: "Google Sheets",
+      },
+      {
+        id: "web",
+        icon: "🌐",
+        bg: "bg-sky-500/15 text-sky-200",
+        label: "HTTP Request",
+      },
+      {
+        id: "ai",
+        icon: "🤖",
+        bg: "bg-violet-500/15 text-violet-200",
+        label: "SAM-3D",
+      },
+    ],
+    stat: "+5",
+    overview:
+      "Turn image uploads into 3D models and track delivery status in a shared workspace.",
+    requirements: [
+      "Image upload form or storage bucket",
+      "SAM-3D inference endpoint",
+      "Project tracker sheet",
+    ],
+    steps: [
+      "Capture new image uploads",
+      "Send the images to SAM-3D for processing",
+      "Store the output model URL",
+      "Update the tracker with status and links",
+    ],
+  },
 ];
