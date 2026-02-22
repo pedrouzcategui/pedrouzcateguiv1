@@ -1,0 +1,274 @@
+export const metadata = {
+  id: 5,
+  author: "Pedro Uzcátegui",
+  title: "The guide to consistent JSON outputs using Claude",
+  slug: "guide-to-consistent-json-outputs-using-claude",
+  excerpt:
+    "How to reliably get machine-parseable JSON from Claude with schemas, delimiters, and a simple repair loop.",
+  date: "2026/02/21",
+};
+
+_If your app depends on JSON, you need the model to behave like a compiler, not like a poet._
+
+LLMs are great at producing structured-looking output.
+They are also great at producing _almost_ structured output.
+
+That “almost” is what breaks pipelines.
+
+This post is a practical guide to getting consistent JSON outputs from Claude.
+Not perfect, not theoretical—just patterns that reduce failures a lot.
+
+## The real problem: valid JSON vs. useful JSON
+
+There are two separate goals:
+
+1. **Valid JSON** (it parses)
+2. **Useful JSON** (it matches the shape you expect)
+
+Most people only ask for (1), then the model gives them:
+
+- A JSON object with the wrong keys
+- An array when you wanted an object
+- Extra fields you never handle
+- Markdown fences like ```json
+
+You want _both_.
+
+## The rule: make the contract explicit
+
+If you want consistent JSON, treat it like a contract.
+Claude should know:
+
+- The exact shape (schema)
+- Which fields are required
+- Allowed values for enums
+- What to do when information is missing
+
+If you don’t specify this, the model will improvise.
+
+## A simple schema (start small)
+
+Example: say you want the model to extract a task list from a paragraph.
+
+Here’s a minimal schema:
+
+```json
+{
+  "tasks": [
+    {
+      "title": "string",
+      "priority": "low | medium | high",
+      "due_date": "YYYY-MM-DD | null"
+    }
+  ]
+}
+```
+
+Keep it boring.
+The more clever you get, the more surface area you create for weird output.
+
+## Prompt template: strict JSON only
+
+This template is intentionally repetitive.
+Repetition helps.
+
+```text
+You are a function that returns ONLY valid JSON.
+
+Return a single JSON object that matches this schema:
+
+SCHEMA:
+{...schema here...}
+
+Rules:
+- Output MUST be valid JSON.
+- Do not wrap in markdown fences.
+- Do not include any extra keys.
+- If a value is unknown, use null.
+- Strings must be plain strings, not formatted.
+
+Input:
+"""
+...user text here...
+"""
+
+Output:
+```
+
+Notes:
+
+- Ending with `Output:` is a good habit.
+- Avoid asking for explanations in the same call.
+- If you want reasoning, do it in a separate step.
+
+## Add hard delimiters
+
+Delimiters reduce “leakage” (extra commentary outside the JSON).
+
+Two good patterns:
+
+1. Triple-quoted input blocks
+2. Output markers that clearly indicate where JSON starts
+
+If you _must_ allow extra text, instruct the model to include it _inside_ the JSON under a specific key, like `"notes"`.
+
+## Force enumerations (don’t let it invent)
+
+If a field is an enum, list the allowed values.
+
+Bad:
+
+- `priority: string`
+
+Better:
+
+- `priority: "low" | "medium" | "high"`
+
+If you don’t constrain it, you’ll get: `"urgent"`, `"p0"`, `"ASAP"`, etc.
+
+## Choose a “missing value” strategy
+
+Pick one strategy and state it explicitly.
+
+Common options:
+
+- `null` for unknown
+- Empty string `""` (I don’t like this)
+- Omit the key entirely (harder to validate)
+
+I prefer `null` because it’s easy to validate and it forces you to handle missing data.
+
+## Temperature and consistency
+
+If you care about determinism, keep temperature low.
+
+- Low temperature → fewer surprises
+- High temperature → more creativity (and more schema drift)
+
+Consistency is not just a prompt problem.
+It’s also a sampling problem.
+
+## The repair loop (when it fails)
+
+Even with strict prompting, you’ll still see occasional invalid JSON.
+The fix is not to “hope more”.
+The fix is to build a small repair loop.
+
+### Step 1: Try to parse
+
+If parsing works and validation passes, you’re done.
+
+### Step 2: If parsing fails, ask Claude to repair
+
+Provide the model’s raw output and ask for a corrected JSON version.
+
+```text
+You previously produced output that is not valid JSON.
+Repair it.
+
+Rules:
+- Output ONLY valid JSON.
+- Match this schema exactly:
+{...schema...}
+
+Here is the invalid output:
+"""
+...raw model output...
+"""
+
+Return the repaired JSON:
+```
+
+In practice, this is surprisingly effective.
+
+### Step 3: If validation fails, ask for a schema-correct rewrite
+
+Parsing succeeded but keys are wrong? Same idea:
+
+- “Rewrite to match schema exactly”
+- “No extra keys”
+- “Unknown values must be null”
+
+## Validate with JSON Schema (or at least a manual validator)
+
+You should validate model output like you validate API input.
+
+Even a basic validator is enough:
+
+- Required keys exist
+- Types are correct
+- Enum values are allowed
+
+If you skip validation, inconsistent output will become a silent bug.
+
+## Example: extraction prompt in one shot
+
+Here’s a full “paste-and-use” example.
+
+```text
+You are a function that returns ONLY valid JSON.
+
+Return a single JSON object matching this schema:
+{
+  "tasks": [
+    {
+      "title": "string",
+      "priority": "low | medium | high",
+      "due_date": "YYYY-MM-DD | null"
+    }
+  ]
+}
+
+Rules:
+- Output MUST be valid JSON.
+- Do not wrap in markdown.
+- Do not include any extra keys.
+- If a value is unknown, use null.
+- priority must be one of: low, medium, high.
+
+Input:
+"""
+Tomorrow I need to email the client, then prepare the demo deck for Friday.
+Also schedule a dentist appointment next week.
+"""
+
+Output:
+```
+
+Expected output shape:
+
+```json
+{
+  "tasks": [
+    { "title": "Email the client", "priority": "medium", "due_date": null },
+    { "title": "Prepare the demo deck", "priority": "high", "due_date": null },
+    {
+      "title": "Schedule a dentist appointment",
+      "priority": "low",
+      "due_date": null
+    }
+  ]
+}
+```
+
+## Two-step approach (most reliable)
+
+If you need _very_ high reliability:
+
+1. First call: Claude extracts facts into a messy but complete structure.
+2. Second call: Claude converts that into strict schema JSON.
+
+This reduces failure because you’re not forcing extraction + formatting + validation all at once.
+
+## Final checklist
+
+- Define a schema with required fields
+- Use explicit enums
+- Require JSON-only output (no Markdown)
+- Use `null` for missing values
+- Keep temperature low when consistency matters
+- Always validate
+- Add a repair loop
+
+Consistent JSON output is not magic.
+It’s just engineering.
