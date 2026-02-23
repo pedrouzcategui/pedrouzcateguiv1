@@ -1,0 +1,41 @@
+export const metadata = {
+  id: 6,
+  author: "Pedro Uzcátegui",
+  title: "Subworkflows: the perfect answer for complex scenarios in n8n",
+  slug: "subworkflows-the-perfect-answer-for-complex-scenarios-in-n8n",
+  excerpt:
+    "Learn how to use subworkflows in n8n to break down complex automation tasks into manageable, reusable pieces.",
+  date: "2026/02/22",
+};
+
+_When your n8n workflow starts looking like a bowl of spaghetti, it's time to introduce subworkflows._
+
+Subworkflows are a powerful feature in n8n that allow you to call one workflow from another. This is similar to calling a function in programming.
+
+## Why use subworkflows?
+
+There are several reasons why you might want to use subworkflows:
+
+1. **Reusability**: If you have a sequence of nodes that you use in multiple workflows, you can put them in a subworkflow and call it from wherever you need it.
+2. **Maintainability**: Breaking a large workflow into smaller subworkflows makes it easier to understand and maintain.
+3. **Error Handling**: You can handle errors in a subworkflow without failing the parent workflow.
+
+## How to create a subworkflow
+
+Creating a subworkflow is easy. Just create a new workflow and add an **Execute Workflow Trigger** node. This node will receive the data passed from the parent workflow.
+
+Then, add the nodes that perform the desired task. Finally, you can optionally add an **Execute Workflow** node at the end to return data back to the parent workflow.
+
+## Calling a subworkflow
+
+To call a subworkflow from another workflow, use the **Execute Workflow** node. You can select the subworkflow you want to call and pass data to it.
+
+## Example scenario
+
+Imagine you have a workflow that processes incoming emails. You might want to extract the attachments, save them to cloud storage, and then send a notification to a Slack channel.
+
+Instead of putting all these nodes in a single workflow, you could create a subworkflow for saving attachments and another for sending notifications. This would make your main workflow much cleaner and easier to understand.
+
+## Conclusion
+
+Subworkflows are an essential tool for building complex automations in n8n. By breaking your workflows into smaller, reusable pieces, you can make them more maintainable, robust, and easier to understand.
