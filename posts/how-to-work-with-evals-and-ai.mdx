@@ -1,0 +1,71 @@
+export const metadata = {
+  id: 7,
+  author: "Pedro Uzcátegui",
+  title: "How to work with Evals and A.I",
+  slug: "how-to-work-with-evals-and-ai",
+  excerpt:
+    "A practical guide to evaluating AI models, building robust eval suites, and ensuring your LLM applications perform reliably in production.",
+  date: "2026/02/23",
+};
+
+_If you aren't measuring your AI's performance, you are just guessing._
+
+Building applications with Large Language Models (LLMs) is easy. Making them reliable is hard. The difference between a cool weekend project and a production-ready AI system comes down to one thing: **Evals**.
+
+Evaluations (or "evals") are the automated tests of the AI world. They help you measure whether a change to your prompt, model, or retrieval pipeline actually improved the system or broke it.
+
+## Why Evals Matter
+
+When you change a prompt to fix a specific edge case, how do you know you didn't break 10 other things? 
+
+Without evals, you rely on "vibe checks"—manually testing a few inputs and seeing if the output looks okay. This doesn't scale. Evals give you a quantitative metric to track over time.
+
+## Types of Evals
+
+There are generally three ways to evaluate LLM outputs:
+
+1. **Deterministic Evals**: These are traditional unit tests. Does the output contain a specific substring? Is the output valid JSON? Is the length under 500 characters?
+2. **Model-Graded Evals (LLM-as-a-Judge)**: Using another LLM (usually a larger, more capable one like GPT-4 or Claude 3.5 Sonnet) to grade the output of your system based on a rubric.
+3. **Human Evals**: Having domain experts review the outputs. This is the gold standard but is slow and expensive.
+
+## Building Your First Eval Suite
+
+Start small. Don't try to build a massive, comprehensive test suite on day one.
+
+### 1. Collect a Golden Dataset
+
+Gather 20-50 real-world examples of inputs and their ideal outputs (or at least the criteria for a good output). This is your baseline.
+
+### 2. Define Your Metrics
+
+What matters for your application?
+- **Accuracy**: Is the information factually correct?
+- **Tone**: Is it polite and professional?
+- **Formatting**: Did it follow the requested JSON schema?
+
+### 3. Automate the Pipeline
+
+Write a script that runs your dataset through your LLM pipeline and scores the outputs. You can use frameworks like Braintrust, LangSmith, or just a simple Python script.
+
+## The LLM-as-a-Judge Pattern
+
+When using an LLM to grade another LLM, you need to be very explicit in your grading prompt.
+
+```text
+You are an expert evaluator. Grade the following response based on accuracy.
+
+Input Question: {question}
+Expected Answer: {expected_answer}
+Actual Response: {actual_response}
+
+Score the response from 1 to 5, where 5 is perfectly accurate and 1 is completely wrong.
+Output ONLY a JSON object with the following schema:
+{
+  "score": number,
+  "reasoning": "string"
+}
+```
+
+## Conclusion
+
+Evals are not optional if you want to build serious AI products. Start with deterministic checks, build a small golden dataset, and gradually introduce model-graded evals as your application grows. Stop guessing and start measuring.
