@@ -257,7 +257,7 @@ export const workflows: N8NWorkflow[] = [
       "Update the tracker with status and links",
     ],
   },
-    {
+  {
     id: "error-catcher",
     title: "Catch all errors",
     description:
@@ -296,6 +296,48 @@ export const workflows: N8NWorkflow[] = [
       "Send the images to SAM-3D for processing",
       "Store the output model URL",
       "Update the tracker with status and links",
+    ],
+  },
+  {
+    id: "website-crawler-extractor",
+    title:
+      "Website Crawler & Extractor with Postgres, Claude Sonnet 4.5, and the native HTTP module ",
+    description:
+      "Crawl web pages, extract structured data using Claude Sonnet 4.5, and store the results in Postgres.",
+    tags: ["Crawler", "Claude 4.5", "Postgres", "HTTP"],
+    apps: [
+      {
+        id: "web",
+        icon: "🌐",
+        bg: "bg-sky-500/15 text-sky-200",
+        label: "HTTP Request",
+      },
+      {
+        id: "ai",
+        icon: "🧠",
+        bg: "bg-amber-500/15 text-amber-200",
+        label: "Claude Sonnet",
+      },
+      {
+        id: "database",
+        icon: "🐘",
+        bg: "bg-blue-500/15 text-blue-200",
+        label: "Postgres",
+      },
+    ],
+    stat: "+4",
+    overview:
+      "Automatically fetch and parse web pages using the native HTTP module, use Claude Sonnet 4.5 to extract valuable information intelligently, and save the structured data into a Postgres database.",
+    requirements: [
+      "Target URLs to crawl",
+      "Anthropic API key for Claude",
+      "PostgreSQL database connection",
+    ],
+    steps: [
+      "Fetch webpage content via HTTP Request",
+      "Send raw HTML/Text to Claude Sonnet 4.5 for extraction",
+      "Parse the JSON/structured output from Claude",
+      "Insert or update records in a Postgres table",
     ],
   },
 ];
